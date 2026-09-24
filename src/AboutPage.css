@@ -1,0 +1,66 @@
+.stack-panel {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  padding: 60px 40px;
+  box-sizing: border-box;
+  background: linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.team-members {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 80px;
+}
+
+.stack-panel-about-mission {
+  z-index: 1;
+}
+.stack-panel-meet-team {
+  z-index: 2;
+}
+.stack-panel-faq {
+  z-index: 3;
+}
+
+p {
+  margin-bottom: 30px;
+}
+
+.about-text {
+  max-width: 1200px;
+  padding-left: 20px;
+  border-left: 3px solid var(--border);
+  text-align: center;
+}
+
+.about-text.accent-blue {
+  border-left-color: var(--blue);
+  padding-left: 120px;
+}
+.about-text.accent-green {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  margin-left: 0px;
+  border-left-color: var(--green);
+  text-align: center;
+}
+
+.stack-panel-faq {
+  align-items: center;
+}
+
+.tag-chip-green {
+  background: var(--green-tint);
+  color: var(--green);
+}
+.tag-chip-rose {
+  background: var(--rose-tint);
+  color: var(--rose);
+}
