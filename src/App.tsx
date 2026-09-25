@@ -5,6 +5,7 @@ import { LearnBudgetingSection } from './components/LearnBudgetingSection';
 import { PracticePlanningSection } from './components/PracticePlanningSection';
 import { ExploreResourcesSection } from './components/ExploreResourcesSection';
 import { GetHelpConnectSection } from './components/GetHelpConnectSection';
+import { SubpageHeader } from './components/SubpageHeader';
 import { Footer } from './components/Footer';
 
 // Routed Pages
@@ -12,6 +13,19 @@ import AboutPage from './AboutPage';
 import BudgetRule from './BudgetRule';
 import SavingsGoals from './SavingsGoals';
 import FaqPage from './FaqPage';
+
+// Standalone Budget Rule Page
+const BudgetRulePage: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-[#f0f0f0] text-[#1a1919] flex flex-col font-sans paper-texture selection:bg-[#0922b0]/20 selection:text-[#0922b0]">
+      <SubpageHeader badgeText="50/30/20 Rule" />
+      <main className="flex-1">
+        <BudgetRule />
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 // Main Landing Page Component
 const LandingPage: React.FC = () => {
@@ -63,12 +77,12 @@ export const App: React.FC = () => {
         
         {/* Dedicated Inner Pages */}
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/budget-rule" element={<BudgetRule />} />
+        <Route path="/budget-rule" element={<BudgetRulePage />} />
         <Route path="/savings-goals" element={<SavingsGoals />} />
         <Route path="/faq" element={<FaqPage />} />
 
         {/* Aliases & Fallbacks */}
-        <Route path="/learn" element={<BudgetRule />} />
+        <Route path="/learn" element={<BudgetRulePage />} />
         <Route path="/practice" element={<SavingsGoals />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
