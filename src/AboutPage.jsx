@@ -3,13 +3,11 @@ import FaqAccordion from "./FaqAccordion";
 import BudgetRule from "./BudgetRule";
 import "./AboutPage.css";
 import MemberAccordion from "./MemberAccordion";
-import SavingsGoals from "./SavingsGoals";
 
 export default function AboutPage() {
   return (
     <div>
       <BudgetRule />
-      <SavingsGoals />
 
       <section className="stack-panel stack-panel-about-mission">
         <span className="eyebrow tag-chip">01 · ABOUT US</span>
