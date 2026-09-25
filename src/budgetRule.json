@@ -1,0 +1,38 @@
+[
+  {
+    "label": "50% — Needs",
+    "title": "The essentials you can't live without",
+    "text": "This half of your budget covers the expenses you genuinely can't avoid — the things that keep your life running no matter what. Utility bills, rent or mortgage payments, health care, and groceries all belong here, along with minimum payments on a credit card or loan. If skipping the payment would mean losing housing, going without food, or missing a required bill, it's a need — not a preference.",
+    "tag": "Essential · non-negotiable",
+    "images": [
+      { "src": "/images/needs-housing.jpg", "alt": "Home representing rent and housing needs" },
+      { "src": "/images/needs-groceries.jpg", "alt": "Groceries representing food needs" },
+      { "src": "/images/needs-utilities.jpg", "alt": "Utility bill representing essential bills" }
+    ],
+    "alt": "Icon representing essential monthly expenses like rent and groceries"
+  },
+  {
+    "label": "30% — Wants",
+    "title": "What you spend on by choice",
+    "text": "This category covers things you spend money on because they add enjoyment to your life, not because your life depends on them. Streaming subscriptions, hobby supplies, restaurant meals, and vacations are classic examples. For students, this often shows up as eating out with friends, games, non-essential shopping, or entertainment subscriptions — all legitimate spending, just not urgent.",
+    "tag": "Discretionary · lifestyle spending",
+    "images": [
+      { "src": "/images/wants-dining.jpg", "alt": "Meal out representing dining for enjoyment" },
+      { "src": "/images/wants-entertainment.jpg", "alt": "Entertainment representing leisure spending" },
+      { "src": "/images/wants-hobby.jpg", "alt": "Hobby supplies representing personal interests" }
+    ],
+    "alt": "Icon representing discretionary spending like entertainment and dining out"
+  },
+  {
+    "label": "20% — Savings",
+    "title": "What you set aside for the future",
+    "text": "The final fifth of your budget is set aside for your future rather than spent right away. This can go toward an emergency fund, retirement contributions, or a savings goal like a down payment, and any extra debt payments beyond the required minimum count here too. For a student, this might look like building a small emergency cushion, saving toward a laptop or a trip, or putting aside part of an allowance each month.",
+    "tag": "Future-focused · goals & safety net",
+    "images": [
+      { "src": "/images/savings-emergency-fund.jpg", "alt": "Emergency fund savings" },
+      { "src": "/images/savings-goal.jpg", "alt": "Money set aside for a savings goal" },
+      { "src": "/images/savings-retirement.jpg", "alt": "Long-term savings for the future" }
+    ],
+    "alt": "Icon representing savings and future financial goals"
+  }
+]

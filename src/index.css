@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=Libre+Baskerville:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --inter: "Inter Tight", "Inter", system-ui, sans-serif;
+  --baskerville: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --ink: #12142b;
+  --text: #4a4f66;
+  --text-h: #12142b;
+  --blue: #3b4fd1;
+  --green: #1f9d5b;
+  --rose: #c0392b;
+  --bg-1: #f6f5fb;
+  --bg-2: #eef4f1;
+  --surface: rgba(255, 255, 255, 0.72);
+  --border: rgba(18, 20, 43, 0.08);
+
+  --blue-tint: rgba(59, 79, 209, 0.1);
+  --green-tint: rgba(31, 157, 91, 0.1);
+  --rose-tint: rgba(192, 57, 43, 0.1);
+
+  --radius-card: 24px;
+  --radius-inner: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 14px rgba(18, 20, 43, 0.06);
+}
+
+html {
+  background: linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  background-attachment: fixed;
+}
+
+body {
+  margin: 0;
+  font-family: var(--inter);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Titles & subtitles → Baskerville */
+h1,
+h2,
+h3,
+.head,
+.subhead {
+  font-family: var(--baskerville);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+}
+h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+/* Body text → Inter (already inherited from body, this is just explicit) */
+p,
+li,
+span,
+button {
+  font-family: var(--inter);
+}
+
+.eyebrow,
+.tag-chip {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.tag-chip {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--blue-tint);
+  color: var(--blue);
+}
+
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  font: 600 0.9rem var(--inter);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+}
+.btn-success {
+  background: var(--green);
+  color: #fff;
+}
+.btn-ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.dot-needs {
+  background: var(--ink);
+}
+.dot-wants {
+  background: var(--rose);
+}
+.dot-savings {
+  background: var(--green);
+}

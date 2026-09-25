@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "image": "",
+    "work": "Built the 50/30/20 scroll animation on the homepage and the progress bar that tracks each stage."
+  },
+  {
+    "id": "2",
+    "image": "",
+    "work": "Designed the visual identity: colors, typography, and the icons used across the guide."
+  },
+  {
+    "id": "3",
+    "image": "",
+    "work": "Coded the FAQ accordion and the About page layout, including the stacking panels."
+  },
+  {
+    "id": "4",
+    "image": "",
+    "work": "Wrote the budgeting guides and student examples, and fact-checked every figure."
+  },
+  {
+    "id": "5",
+    "image": "",
+    "work": "Built the AI chatbot and the interactive budget planner."
+  }
+]
