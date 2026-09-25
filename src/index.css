@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primaryBg: #f0f0f0;
+  --color-textMain: #1a1919;
+  --color-brandBlue: #0922b0;
+  --color-brandGreen: #0eb02c;
+  --color-brandRed: #d12828;
+  --color-warmBg: #f0f0f0;
+  --color-warmCard: #ffffff;
+  --color-warmBorder: rgba(26, 25, 25, 0.08);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+:root {
+  --bg-color: #f0f0f0;
+  --text-main: #1a1919;
+  --brand-blue: #0922b0;
+  --brand-green: #0eb02c;
+  --brand-red: #d12828;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Subtle textured background */
+.paper-texture {
+  background-color: #f0f0f0;
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(9, 34, 176, 0.03) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(14, 176, 44, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(209, 40, 40, 0.02) 0px, transparent 50%);
+}
+
+/* Glass Pill Navigation */
+.nav-pill {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Floating Card Shadow */
+.card-shadow {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* 3D Perspective Container */
+.perspective-container {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+/* FLOATING MICRO-ANIMATION FOR 3D ASSETS */
+@keyframes floatSubtle {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+.animate-float-3d {
+  animation: floatSubtle 4s ease-in-out infinite;
+}
+
+/* ORGANIC EMOTIVE 3D PERSPECTIVE STREAM (16s Continuous Duo Loop, 3.2s offset) */
+@keyframes organicDuoStreamLoop {
+  /* 1. INCOMING: Soft 3D entrance */
+  0% {
+    transform: translate3d(0px, -70px, -30px) rotateX(4deg) scale(0.92);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    filter: blur(2px);
+  }
+  8% {
+    transform: translate3d(0px, -36px, -10px) rotateX(2deg) scale(0.96);
+    opacity: 0.95;
+    pointer-events: auto;
+    z-index: 20;
+    filter: blur(0px);
+    box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Slot 1: Gentle breathing hover in upper orbit */
+  16% {
+    transform: translate3d(0px, -36px, -10px) rotateX(2deg) scale(0.96);
+    opacity: 0.95;
+    pointer-events: auto;
+    z-index: 20;
+    filter: blur(0px);
+    box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+  }
+
+  /* 2. ADVANCE TO SLOT 2: Glides forward into focal spotlight stage */
+  24% {
+    transform: translate3d(0px, 36px, 15px) rotateX(0deg) scale(1.02);
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 35;
+    filter: blur(0px);
+    box-shadow: 0 24px 48px -10px rgba(0, 0, 0, 0.16), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Slot 2: Focal spotlight hold with full presence */
+  32% {
+    transform: translate3d(0px, 36px, 15px) rotateX(0deg) scale(1.02);
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 35;
+    filter: blur(0px);
+    box-shadow: 0 24px 48px -10px rgba(0, 0, 0, 0.16), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* 3. DEPARTING: Glides away smoothly through bottom with gentle tilt */
+  39% {
+    transform: translate3d(0px, 90px, -30px) rotateX(-4deg) scale(0.92);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    filter: blur(2px);
+  }
+
+  /* 4. INVISIBLE RESET */
+  40% {
+    transform: translate3d(0px, -70px, -30px) rotateX(4deg) scale(0.92);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  100% {
+    transform: translate3d(0px, -70px, -30px) rotateX(4deg) scale(0.92);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.card-trajectory-1,
+.card-trajectory-2,
+.card-trajectory-3,
+.card-trajectory-4,
+.card-trajectory-5 {
+  animation-duration: 16s;
+  animation-timing-function: cubic-bezier(0.34, 1.15, 0.64, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity, box-shadow, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-trajectory-1 {
+  animation-name: organicDuoStreamLoop;
+  animation-delay: 0s;
+}
+
+.card-trajectory-2 {
+  animation-name: organicDuoStreamLoop;
+  animation-delay: -3.2s;
+}
+
+.card-trajectory-3 {
+  animation-name: organicDuoStreamLoop;
+  animation-delay: -6.4s;
+}
+
+.card-trajectory-4 {
+  animation-name: organicDuoStreamLoop;
+  animation-delay: -9.6s;
+}
+
+.card-trajectory-5 {
+  animation-name: organicDuoStreamLoop;
+  animation-delay: -12.8s;
+}
+
+/* Smooth transition when hovering or pausing stream */
+.pause-stream .card-trajectory-1,
+.pause-stream .card-trajectory-2,
+.pause-stream .card-trajectory-3,
+.pause-stream .card-trajectory-4,
+.pause-stream .card-trajectory-5 {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.pause-stream:hover .card-trajectory-1,
+.pause-stream:hover .card-trajectory-2,
+.pause-stream:hover .card-trajectory-3,
+.pause-stream:hover .card-trajectory-4,
+.pause-stream:hover .card-trajectory-5 {
+  animation-play-state: paused;
+}
+
+/* OVERFLOW SLIDE-IN ANIMATIONS FOR ABOUT STATS CARDS */
+@keyframes slideInRightSide {
+  0% {
+    transform: translate3d(70px, 0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeftSide {
+  0% {
+    transform: translate3d(-70px, 0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottomRight {
+  0% {
+    transform: translate3d(50px, 50px, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRightSide 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeftSide 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-bottom-right {
+  animation: slideInBottomRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Subtle chevron/mesh card pattern */
+.chevron-pattern {
+  background-image: 
+    linear-gradient(45deg, rgba(26, 25, 25, 0.03) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(26, 25, 25, 0.03) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(26, 25, 25, 0.03) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(26, 25, 25, 0.03) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+
