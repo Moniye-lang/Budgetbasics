@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+<<<<<<< HEAD
 @theme {
   --color-primaryBg: #f0f0f0;
   --color-textMain: #1a1919;
@@ -255,5 +256,93 @@ body {
     linear-gradient(-45deg, transparent 75%, rgba(26, 25, 25, 0.03) 75%);
   background-size: 16px 16px;
   background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+
+/* Page Design Tokens & Utility Classes for Subpages */
+:root {
+  --inter: "Inter", system-ui, sans-serif;
+  --baskerville: "Instrument Serif", "Newsreader", serif;
+  --mono: "JetBrains Mono", monospace;
+
+  --ink: #1a1919;
+  --text: #4a4f66;
+  --text-h: #1a1919;
+  --blue: #0922b0;
+  --green: #0eb02c;
+  --rose: #d12828;
+  --bg-1: #f0f0f0;
+  --bg-2: #eef4f1;
+  --surface: rgba(255, 255, 255, 0.88);
+  --border: rgba(26, 25, 25, 0.08);
+
+  --blue-tint: rgba(9, 34, 176, 0.08);
+  --green-tint: rgba(14, 176, 44, 0.08);
+  --rose-tint: rgba(209, 40, 40, 0.08);
+
+  --radius-card: 24px;
+  --radius-inner: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.tag-chip {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--blue-tint);
+  color: var(--blue);
+}
+
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  font: 600 0.9rem var(--inter);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+}
+.btn-success {
+  background: var(--green);
+  color: #fff;
+}
+.btn-ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.dot-needs {
+  background: var(--ink);
+}
+.dot-wants {
+  background: var(--rose);
+}
+.dot-savings {
+  background: var(--green);
 }
 
