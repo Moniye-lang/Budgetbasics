@@ -25,7 +25,7 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
   const [contactSent, setContactSent] = useState(false);
   const [contactEmail, setContactEmail] = useState('');
   const [contactMsg, setContactMsg] = useState('');
-  
+
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const learnTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const practiceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -102,18 +102,16 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
               >
                 <a
                   href="#learn"
-                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center min-w-[74px] ${
-                    isLearnHovered
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center min-w-[74px] ${isLearnHovered
                       ? 'bg-[#0922b0]/10 text-[#0922b0]'
                       : 'hover:text-[#0922b0]'
-                  }`}
+                    }`}
                   aria-label="Learn Budgeting"
                 >
                   {/* Idle State: Text "Learn" + Indicator Dot */}
                   <span
-                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${
-                      isLearnHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
-                    }`}
+                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${isLearnHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
+                      }`}
                   >
                     <span>Learn</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0922b0]" title="50/30/20" />
@@ -121,9 +119,8 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
 
                   {/* Hover State: Books Lottie Animation */}
                   <div
-                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${
-                      isLearnHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-                    }`}
+                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${isLearnHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                      }`}
                   >
                     <div className="w-7 h-7 flex items-center justify-center shrink-0">
                       <DotLottiePlayer
@@ -207,18 +204,16 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
               >
                 <a
                   href="#practice"
-                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center min-w-[84px] ${
-                    isPracticeHovered
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center min-w-[84px] ${isPracticeHovered
                       ? 'bg-[#0eb02c]/10 text-[#0eb02c]'
                       : 'hover:text-[#0eb02c]'
-                  }`}
+                    }`}
                   aria-label="Practice Planning"
                 >
                   {/* Idle State: Text "Practice" + Indicator Dot */}
                   <span
-                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${
-                      isPracticeHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
-                    }`}
+                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${isPracticeHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
+                      }`}
                   >
                     <span>Practice</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0eb02c]" title="Studio" />
@@ -226,9 +221,8 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
 
                   {/* Hover State: Hands Lottie Animation */}
                   <div
-                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${
-                      isPracticeHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-                    }`}
+                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${isPracticeHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                      }`}
                   >
                     <div className="w-7 h-7 flex items-center justify-center shrink-0">
                       <DotLottiePlayer
@@ -305,16 +299,16 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
               </div>
 
               {/* 3. Resources Navigation Item */}
-              <a 
-                href="#resources" 
+              <a
+                href="#resources"
                 className="px-3 py-1.5 rounded-full hover:text-[#0922b0] transition-colors"
               >
                 Resources
               </a>
 
               {/* 4. Get Help Navigation Item */}
-              <a 
-                href="#connect" 
+              <a
+                href="#connect"
                 className="px-3 py-1.5 rounded-full hover:text-[#0eb02c] transition-colors"
               >
                 Get Help
@@ -328,18 +322,16 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
               >
                 <button
                   onClick={() => setIsContactModalOpen(true)}
-                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center cursor-pointer min-w-[80px] ${
-                    isContactHovered
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center cursor-pointer min-w-[80px] ${isContactHovered
                       ? 'bg-[#0922b0]/10 text-[#0922b0]'
                       : 'hover:text-[#0922b0]'
-                  }`}
+                    }`}
                   aria-label="Contact Us"
                 >
                   {/* 1. Idle State: Text "Contact" */}
                   <span
-                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${
-                      isContactHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
-                    }`}
+                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${isContactHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
+                      }`}
                   >
                     <span>Contact</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0922b0]" title="Online" />
@@ -347,9 +339,8 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
 
                   {/* 2. Hover State: Email Lottie Animation */}
                   <div
-                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${
-                      isContactHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-                    }`}
+                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${isContactHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                      }`}
                   >
                     <div className="w-7 h-7 flex items-center justify-center shrink-0">
                       <DotLottiePlayer
@@ -475,11 +466,11 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
 
             {/* Header with Lottie Animation */}
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 rounded-2xl bg-[#0922b0]/10 border border-[#0922b0]/20 flex items-center justify-center overflow-hidden shrink-0 shadow-inner p-2">
+              <div className="w-16 h-16 rounded-2xl bg-[#0922b0]/10 border border-[#0922b0]/20 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
                 <DotLottiePlayer
                   animationData={contactEmailLottieJson}
                   src="/contact-email-lottie.json"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full scale-110"
                 />
               </div>
               <div>
@@ -617,7 +608,7 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
           <div className="pt-3 border-t border-[#1a1919]/10 flex items-center gap-3">
             <div className="flex -space-x-2 overflow-hidden items-center">
               <img
-                className="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-white shadow-xs object-contain p-0.5 hover:scale-125 transition-transform"
+                className="inline-block h-10 w-8 rounded-full ring-2 ring-white bg-white shadow-xs object-contain p-0.5 hover:scale-125 transition-transform"
                 src="https://cdn3d.iconscout.com/3d/premium/thumb/budget-calculation-3d-icon-png-download-4874122.png"
                 alt="Budget Calc 3D"
                 title="Budget Calculation 3D"
@@ -656,7 +647,7 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
         {/* Right Column: Emotive 3D Perspective Sliding Stream (lg:col-span-5) */}
         <div className="lg:col-span-5 relative h-[560px] sm:h-[620px] flex items-center justify-center perspective-container overflow-visible select-none pause-stream">
           <div className="relative w-full max-w-[420px] sm:max-w-[460px] h-[240px] sm:h-[260px] flex items-center justify-center">
-            
+
             {/* Card 1: Budget Calculation 3D */}
             <div className="absolute w-full card-trajectory-1 cursor-pointer">
               <div className="w-full h-[240px] sm:h-[260px] bg-white/95 backdrop-blur-xl rounded-3xl p-6 relative flex items-center justify-center border border-[#1a1919]/10 shadow-xl overflow-hidden group hover:border-[#0eb02c]/50 transition-all duration-300">
