@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { TasteSkillHero } from './components/TasteSkillHero';
 import { LearnBudgetingSection } from './components/LearnBudgetingSection';
 import { PracticePlanningSection } from './components/PracticePlanningSection';
@@ -6,7 +7,14 @@ import { ExploreResourcesSection } from './components/ExploreResourcesSection';
 import { GetHelpConnectSection } from './components/GetHelpConnectSection';
 import { Footer } from './components/Footer';
 
-export const App: React.FC = () => {
+// Routed Pages
+import AboutPage from './AboutPage';
+import BudgetRule from './BudgetRule';
+import SavingsGoals from './SavingsGoals';
+import FaqPage from './FaqPage';
+
+// Main Landing Page Component
+const LandingPage: React.FC = () => {
   const scrollToLearn = () => {
     const el = document.getElementById('learn');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -43,6 +51,28 @@ export const App: React.FC = () => {
       {/* 3. Footer */}
       <Footer />
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Home / Landing Page */}
+        <Route path="/" element={<LandingPage />} />
+        
+        {/* Dedicated Inner Pages */}
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/budget-rule" element={<BudgetRule />} />
+        <Route path="/savings-goals" element={<SavingsGoals />} />
+        <Route path="/faq" element={<FaqPage />} />
+
+        {/* Aliases & Fallbacks */}
+        <Route path="/learn" element={<BudgetRule />} />
+        <Route path="/practice" element={<SavingsGoals />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

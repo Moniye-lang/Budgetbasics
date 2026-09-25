@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Check, ArrowRight, Github, Star, Sparkles, ShoppingBag, ArrowUpRight, Mail, MessageSquare, Send, X, ExternalLink, BookOpen, Sliders } from 'lucide-react';
 import { DotLottiePlayer } from './DotLottiePlayer';
 import { contactEmailLottieJson } from '../data/contactLottie';
@@ -167,9 +168,10 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
                     </div>
 
                     {/* Action Buttons in Hover Card */}
+                    {/* Action Buttons in Hover Card */}
                     <div className="space-y-2 pt-2 border-t border-[#1a1919]/10">
-                      <a
-                        href="#learn"
+                      <Link
+                        to="/budget-rule"
                         onClick={() => setIsLearnHovered(false)}
                         className="w-full py-2 px-3 rounded-xl bg-[#0922b0] hover:bg-[#071a8a] text-white text-xs font-medium flex items-center justify-between transition-colors shadow-sm group/btn"
                       >
@@ -178,7 +180,7 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
                           <span>Jump to 50/30/20 Guide</span>
                         </span>
                         <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover/btn:text-white" />
-                      </a>
+                      </Link>
 
                       <a
                         href="#resources"
@@ -204,16 +206,18 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
               >
                 <a
                   href="#practice"
-                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center min-w-[84px] ${isPracticeHovered
+                  className={`relative px-3.5 py-1.5 rounded-full transition-all duration-200 flex items-center justify-center min-w-[84px] ${
+                    isPracticeHovered
                       ? 'bg-[#0eb02c]/10 text-[#0eb02c]'
                       : 'hover:text-[#0eb02c]'
-                    }`}
+                  }`}
                   aria-label="Practice Planning"
                 >
                   {/* Idle State: Text "Practice" + Indicator Dot */}
                   <span
-                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${isPracticeHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
-                      }`}
+                    className={`font-semibold text-xs tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                      isPracticeHovered ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
+                    }`}
                   >
                     <span>Practice</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0eb02c]" title="Studio" />
@@ -221,8 +225,9 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
 
                   {/* Hover State: Hands Lottie Animation */}
                   <div
-                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${isPracticeHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-                      }`}
+                    className={`absolute inset-0 m-auto flex items-center justify-center transition-all duration-200 pointer-events-none ${
+                      isPracticeHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                    }`}
                   >
                     <div className="w-7 h-7 flex items-center justify-center shrink-0">
                       <DotLottiePlayer
@@ -270,8 +275,8 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
 
                     {/* Action Buttons in Hover Card */}
                     <div className="space-y-2 pt-2 border-t border-[#1a1919]/10">
-                      <a
-                        href="#practice"
+                      <Link
+                        to="/savings-goals"
                         onClick={() => setIsPracticeHovered(false)}
                         className="w-full py-2 px-3 rounded-xl bg-[#0eb02c] hover:bg-[#0c9626] text-white text-xs font-medium flex items-center justify-between transition-colors shadow-sm group/btn"
                       >
@@ -280,7 +285,7 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
                           <span>Open Planning Studio</span>
                         </span>
                         <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover/btn:text-white" />
-                      </a>
+                      </Link>
 
                       <a
                         href="#practice"
@@ -298,21 +303,21 @@ export const TasteSkillHero: React.FC<TasteSkillHeroProps> = ({
                 )}
               </div>
 
-              {/* 3. Resources Navigation Item */}
-              <a
-                href="#resources"
-                className="px-3 py-1.5 rounded-full hover:text-[#0922b0] transition-colors"
+              {/* 3. About Us Navigation Item */}
+              <Link 
+                to="/about" 
+                className="px-3 py-1.5 rounded-full hover:text-[#0922b0] transition-colors font-semibold"
               >
-                Resources
-              </a>
+                About Us
+              </Link>
 
-              {/* 4. Get Help Navigation Item */}
-              <a
-                href="#connect"
-                className="px-3 py-1.5 rounded-full hover:text-[#0eb02c] transition-colors"
+              {/* 4. FAQ Navigation Item */}
+              <Link 
+                to="/faq" 
+                className="px-3 py-1.5 rounded-full hover:text-[#0eb02c] transition-colors font-semibold"
               >
-                Get Help
-              </a>
+                FAQ
+              </Link>
 
               {/* Iconic Contact Navigation Link with Text -> Lottie Animation Swap on Hover */}
               <div
