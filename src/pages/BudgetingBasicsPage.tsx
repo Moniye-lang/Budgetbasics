@@ -14,11 +14,13 @@ interface BudgetingBasicsPageProps {
   onBackToHome?: () => void;
   onNavigateToPractice?: () => void;
   onNavigateToNeedsVsWants?: () => void;
+  onOpenConverterModal?: () => void;
 }
 
 export const BudgetingBasicsPage: React.FC<BudgetingBasicsPageProps> = ({
   onNavigateToPractice,
-  onNavigateToNeedsVsWants
+  onNavigateToNeedsVsWants,
+  onOpenConverterModal,
 }) => {
   const { currentCurrency } = useCurrency();
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -28,7 +30,7 @@ export const BudgetingBasicsPage: React.FC<BudgetingBasicsPageProps> = ({
   const currentClassData = classifierDatabase[activeClassifier] || classifierDatabase.groceries;
 
   const quizQuestion = {
-    question: "You receive your monthly allowance of $1,000. Your rent share is $450 and basic groceries are $150. Which category does this $600 belong to?",
+    question: `You receive your monthly allowance of ${currentCurrency.symbol}${currentCurrency.code === 'NGN' ? '50,000' : '1,000'}. Your rent share is ${currentCurrency.symbol}${currentCurrency.code === 'NGN' ? '22,500' : '450'} and basic groceries are ${currentCurrency.symbol}${currentCurrency.code === 'NGN' ? '7,500' : '150'}. Which category does this belong to?`,
     options: [
       { id: 0, text: "30% Wants & Fun", isCorrect: false, explanation: "Housing and basic food are vital for survival and academic attendance, making them non-negotiable Needs." },
       { id: 1, text: "50% Non-Negotiable Needs", isCorrect: true, explanation: "Correct! Rent and basic nutrition are essential fixed/baseline outlays that must be paid before any discretionary spending." },

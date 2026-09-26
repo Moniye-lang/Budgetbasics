@@ -1042,7 +1042,7 @@ export const InfographicsPage: React.FC<InfographicsPageProps> = () => {
                 VISUAL LEARNING GALLERY
               </span>
 
-              <h2 className="mt-4 font-serif text-3xl font-bold leading-tight tracking-tight text-[#171717] sm:text-4xl lg:text-5xl">
+              <h2 className="mt-4 font-sans text-3xl font-extrabold leading-tight tracking-tight text-[#171717] sm:text-4xl lg:text-5xl">
                 Learning Gallery &amp; Financial Infographics
               </h2>
 
