@@ -1,0 +1,206 @@
+[
+  {
+    "id": "greeting",
+    "keywords": ["hi", "hello", "hey", "good morning", "good afternoon", "good evening"],
+    "question": "Hello",
+    "answer": "Hi there! I'm the BudgetBasics assistant. Ask me about budgeting basics, needs vs wants, the 50/30/20 rule, savings goals, or common money mistakes — I'm here to help you learn."
+  },
+  {
+    "id": "what-is-budgetbasics",
+    "keywords": ["what is budgetbasics", "what is this site", "what is this app", "about this site"],
+    "question": "What is BudgetBasics?",
+    "answer": "BudgetBasics is a student-led educational website that helps you learn budgeting fundamentals — understanding income, expenses, needs, wants, and savings — through simple guides, visual tools, and interactive examples."
+  },
+  {
+    "id": "what-is-a-need",
+    "keywords": ["what is a need", "define need", "what counts as a need", "need meaning"],
+    "question": "What is a need?",
+    "answer": "A need is an expense you genuinely can't avoid — something required to live and function normally. Rent, groceries, utility bills, healthcare, and transportation to school or work are all needs. A simple test: if skipping it would seriously disrupt your life, it's a need."
+  },
+  {
+    "id": "what-is-a-want",
+    "keywords": ["what is a want", "define want", "what counts as a want", "want meaning"],
+    "question": "What is a want?",
+    "answer": "A want is something you spend money on by choice because it adds enjoyment to your life, not because you can't survive without it. Streaming subscriptions, eating out, games, and shopping for non-essentials are all wants."
+  },
+  {
+    "id": "needs-vs-wants-difference",
+    "keywords": ["difference between needs and wants", "needs vs wants", "how to tell needs from wants"],
+    "question": "What's the difference between needs and wants?",
+    "answer": "Needs are essential for survival and daily functioning — think rent, food, and bills. Wants are things you enjoy but could live without — think takeout, games, or new clothes you don't strictly need. A good gut-check: ask 'would skipping this cause a real problem in my life?' If yes, it's a need."
+  },
+  {
+    "id": "50-30-20-explain",
+    "keywords": ["50 30 20", "50/30/20", "what is the 50 30 20 rule", "explain the 50 30 20 rule"],
+    "question": "What is the 50/30/20 rule?",
+    "answer": "The 50/30/20 rule is a simple budgeting guideline: spend 50% of your income on needs, 30% on wants, and 20% on savings or debt repayment. It's not a strict law — just a helpful starting point you can adjust to fit your situation."
+  },
+  {
+    "id": "50-percent-needs",
+    "keywords": ["what goes in the 50 percent", "what is the 50 for", "needs percentage"],
+    "question": "What does the 50% in the 50/30/20 rule cover?",
+    "answer": "The 50% covers your needs — the essentials you can't avoid, like rent, groceries, utility bills, healthcare, and minimum debt payments."
+  },
+  {
+    "id": "30-percent-wants",
+    "keywords": ["what goes in the 30 percent", "what is the 30 for", "wants percentage"],
+    "question": "What does the 30% in the 50/30/20 rule cover?",
+    "answer": "The 30% covers your wants — things you spend on by choice for enjoyment, like eating out, hobbies, subscriptions, and entertainment."
+  },
+  {
+    "id": "20-percent-savings",
+    "keywords": ["what goes in the 20 percent", "what is the 20 for", "savings percentage"],
+    "question": "What does the 20% in the 50/30/20 rule cover?",
+    "answer": "The 20% goes toward savings and future goals — an emergency fund, a savings goal, or paying down extra debt beyond the minimum."
+  },
+  {
+    "id": "how-much-should-i-save",
+    "keywords": ["how much should i save", "how much to save", "how much savings"],
+    "question": "How much should I save?",
+    "answer": "A common guideline is 20% of your income, following the 50/30/20 rule. If that feels like too much right now, starting with even 5-10% consistently is far better than saving nothing — the habit matters more than the exact number at first."
+  },
+  {
+    "id": "how-to-start-saving",
+    "keywords": ["how do i start saving", "how to start a savings habit", "start saving money"],
+    "question": "How do I start saving money?",
+    "answer": "Start small and be consistent. Pick one goal (even a small one), set aside a fixed amount each time you get paid or receive your allowance, and try to treat it like a non-negotiable bill rather than leftover money. Automating it, even manually moving money to a separate spot right away, makes it much easier to stick with."
+  },
+  {
+    "id": "emergency-fund",
+    "keywords": ["what is an emergency fund", "emergency fund", "why do i need an emergency fund"],
+    "question": "What is an emergency fund?",
+    "answer": "An emergency fund is money set aside specifically for unexpected expenses — a medical bill, urgent repair, or sudden loss of income. It's not for planned spending. Even a small cushion can prevent an unexpected cost from turning into a financial crisis."
+  },
+  {
+    "id": "how-to-avoid-overspending",
+    "keywords": ["how do i avoid overspending", "avoid overspending", "stop overspending", "spend less"],
+    "question": "How do I avoid overspending?",
+    "answer": "A few habits help: track your spending so you actually know where money goes, wait 24 hours before non-essential purchases, unsubscribe from services you don't use often, and set a clear 'wants' limit each month so you're not deciding case by case."
+  },
+  {
+    "id": "impulse-buying",
+    "keywords": ["impulse buying", "impulse purchase", "how to stop impulse buying"],
+    "question": "What is impulse buying and how do I avoid it?",
+    "answer": "Impulse buying is making an unplanned purchase in the moment, usually driven by emotion rather than need. To avoid it, try the 24-hour rule — wait a day before buying anything not on your list — and ask yourself whether you'd still want it tomorrow."
+  },
+  {
+    "id": "unused-subscriptions",
+    "keywords": ["unused subscriptions", "forgotten subscriptions", "cancel subscriptions"],
+    "question": "How do unused subscriptions affect my budget?",
+    "answer": "Subscriptions are easy to forget about because they're automatic — a few small charges add up fast over a year. It's worth reviewing your bank statement every month or two and cancelling anything you haven't actually used recently."
+  },
+  {
+    "id": "late-payments",
+    "keywords": ["late payments", "missed payment", "why avoid late payments"],
+    "question": "Why should I avoid late payments?",
+    "answer": "Late payments often come with fees and can affect your credit history over time, making it more expensive to borrow money in the future. Setting reminders or automatic minimum payments can help you avoid missing due dates."
+  },
+  {
+    "id": "spending-without-a-plan",
+    "keywords": ["spending without a plan", "no budget plan", "why do i need a budget"],
+    "question": "Why is spending without a plan a mistake?",
+    "answer": "Without a plan, it's easy to lose track of where your money goes and run out before you expect to. Even a simple plan — like the 50/30/20 rule — gives every dollar a purpose and makes it much easier to catch problems early."
+  },
+  {
+    "id": "what-is-a-budget",
+    "keywords": ["what is a budget", "define budget", "budget meaning"],
+    "question": "What is a budget?",
+    "answer": "A budget is simply a plan for how you'll spend and save your income over a period of time, usually a month. It helps you make sure your needs are covered, you're not overspending on wants, and you're setting some money aside for the future."
+  },
+  {
+    "id": "how-to-make-a-budget",
+    "keywords": ["how do i make a budget", "how to create a budget", "build a budget"],
+    "question": "How do I make a budget?",
+    "answer": "Start by listing your total monthly income, then your fixed expenses (rent, bills), variable expenses (groceries, transport), and wants (entertainment, eating out). Assign a percentage or amount to each category — the 50/30/20 rule is a good starting template — then track your actual spending against it."
+  },
+  {
+    "id": "fixed-vs-variable-expenses",
+    "keywords": ["fixed expenses", "variable expenses", "difference between fixed and variable expenses"],
+    "question": "What's the difference between fixed and variable expenses?",
+    "answer": "Fixed expenses stay the same each month, like rent or a subscription fee. Variable expenses change month to month, like groceries, transport, or entertainment — they're often the easiest place to adjust your spending if you need to cut back."
+  },
+  {
+    "id": "savings-goal-calculator",
+    "keywords": ["savings goal", "how long to save", "how to set a savings goal"],
+    "question": "How do I set a savings goal?",
+    "answer": "Pick a target amount and a rough timeframe, then work out how much you'd need to save each month to get there. Our Savings Goals tool on this site can calculate that for you automatically — just enter your target, what you've already saved, and your monthly contribution."
+  },
+  {
+    "id": "expense-planner-explain",
+    "keywords": ["what is the expense planner", "how does the expense planner work"],
+    "question": "How does the Expense Planner work?",
+    "answer": "The Expense Planner lets you add sample expenses with a date, category, description, and amount. It'll total everything up and show your remaining balance, so you can see how your planned spending stacks up against your income."
+  },
+  {
+    "id": "is-this-a-bank",
+    "keywords": ["is this a real bank", "can i use this with my bank account", "is this connected to my bank"],
+    "question": "Is BudgetBasics a real banking app?",
+    "answer": "No — BudgetBasics is purely educational. It doesn't connect to real bank accounts, process real transactions, or store your actual financial data. It's a space to learn and practice budgeting concepts with sample numbers."
+  },
+  {
+    "id": "is-data-saved",
+    "keywords": ["is my data saved", "does this site save my information", "is my information stored"],
+    "question": "Is my financial data saved anywhere?",
+    "answer": "No, nothing you enter here is saved to a server or transmitted anywhere. Any numbers you enter into the calculators exist only during your current session and disappear once you close or refresh the page."
+  },
+  {
+    "id": "who-is-this-for",
+    "keywords": ["who is this site for", "who is budgetbasics for", "is this only for students"],
+    "question": "Who is BudgetBasics for?",
+    "answer": "It's built primarily for students managing an allowance, scholarship, or part-time income for the first time — but really, anyone new to budgeting can use it."
+  },
+  {
+    "id": "allowance-budgeting",
+    "keywords": ["how do i budget my allowance", "budgeting allowance", "manage allowance"],
+    "question": "How do I budget my allowance?",
+    "answer": "Treat your allowance the same way you'd treat any income — split it using something like the 50/30/20 rule. Cover your essentials first, set aside a portion for savings, and only then spend the rest on things you want."
+  },
+  {
+    "id": "part-time-income-budget",
+    "keywords": ["budgeting part time job", "budget my paycheck", "part time income"],
+    "question": "How do I budget income from a part-time job?",
+    "answer": "Start by knowing your actual take-home pay after any deductions, then apply the same needs/wants/savings split. Since part-time income can vary week to week, it also helps to base your budget on your lowest expected paycheck rather than your best one."
+  },
+  {
+    "id": "debt-in-budget",
+    "keywords": ["how do i budget for debt", "paying off debt", "debt repayment"],
+    "question": "Where does debt repayment fit in a budget?",
+    "answer": "Minimum required payments on a loan or credit card count as a need, since missing them has real consequences. Any extra amount you pay beyond the minimum counts toward your savings category, since it's building your financial future."
+  },
+  {
+    "id": "why-track-spending",
+    "keywords": ["why should i track my spending", "importance of tracking expenses"],
+    "question": "Why is tracking my spending important?",
+    "answer": "You can't manage what you don't measure. Tracking spending shows you exactly where your money actually goes, which often reveals surprises — small recurring costs that add up more than you'd expect."
+  },
+  {
+    "id": "budget-too-strict",
+    "keywords": ["my budget feels too strict", "budget is unrealistic", "budget too restrictive"],
+    "question": "What if my budget feels too strict?",
+    "answer": "A budget that feels impossible to stick to usually gets abandoned. It's fine to adjust the percentages to fit your real life — the goal is a plan you'll actually follow, not a perfect ratio. The 50/30/20 split is a guideline, not a rule you have to follow exactly."
+  },
+  {
+    "id": "no-income-budget",
+    "keywords": ["how do i budget with no income", "budgeting with irregular income"],
+    "question": "How do I budget with irregular or no fixed income?",
+    "answer": "With irregular income, it helps to budget based on your average or lowest recent month rather than your best one, and build a bigger buffer in savings for slower months. Prioritize needs first every time income comes in, before assigning anything to wants."
+  },
+  {
+    "id": "thank-you",
+    "keywords": ["thank you", "thanks", "thank you so much"],
+    "question": "Thank you",
+    "answer": "You're welcome! Feel free to ask me anything else about budgeting, needs vs wants, savings, or common money mistakes."
+  },
+  {
+    "id": "bye",
+    "keywords": ["bye", "goodbye", "see you"],
+    "question": "Goodbye",
+    "answer": "Take care! Come back anytime you want to brush up on your budgeting basics."
+  },
+  {
+    "id": "who-made-this",
+    "keywords": ["who made this", "who built this site", "who created budgetbasics"],
+    "question": "Who made BudgetBasics?",
+    "answer": "BudgetBasics was designed and built by a team of Aptech ADSE students for the TechWiz7 hackathon, combining what we've learned in frontend development and UI/UX design into something we'd actually want to use ourselves."
+  }
+]

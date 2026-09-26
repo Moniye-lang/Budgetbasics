@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "The 50/30/20 Rule: The Ultimate Framework for Beginners",
+    "readTime": "4 MIN READ",
+    "content": [
+      "The 50/30/20 rule is one of the most intuitive and enduring budgeting strategies ever conceived. Popularized by Harvard bankruptcy expert and U.S. Senator Elizabeth Warren, this framework simplifies your personal finances into three straightforward categories.",
+      "**50% Essentials (Needs)**: This portion of your take-home pay covers expenses you cannot avoid without serious consequences. It includes housing rent, basic groceries, electricity and water utilities, healthcare prescriptions, and essential transit to school or work.",
+      "**30% Lifestyle (Wants)**: This discretionary bucket gives you guilt-free permission to enjoy life. It covers weekend dining out, streaming subscriptions, concert tickets, gym memberships, and hobbies.",
+      "**20% Future Reserves (Savings & Debt)**: The final portion is dedicated to building wealth and financial defense. This funds your emergency cushion, student loan pre-payments, and early retirement investments."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Needs vs. Wants: The 24-Hour Decision Filter",
+    "readTime": "3 MIN READ",
+    "content": [
+      "Distinguishing between an essential need and a discretionary want is the core skill that separates stressed students from financially confident ones.",
+      "**The Survival & Academics Test**: Ask yourself: 'If I do not buy this item within the next 48 hours, will my health, safety, shelter, or academic enrollment be compromised?' If the answer is no, it is a want.",
+      "**The 24-Hour Cooling Rule**: Whenever you feel the impulsive urge to purchase a non-essential item over $20, force yourself to close the app and wait a full 24 hours. Studies show that over 80% of impulse buying urges completely fade after a night of sleep.",
+      "**Work Hours Conversion**: Convert the price tag into hours of part-time campus work. Is that $60 jacket worth 4 hours of shifts? This mental shift instantly reframes spending."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "The 4-Stage Student Budget Cycle",
+    "readTime": "5 MIN READ",
+    "content": [
+      "A budget is not a static document you write once and forget in a drawer. It is a living, monthly feedback loop that evolves with your academic semester.",
+      "**Stage 1 - Plan**: At the start of the month, project your expected allowance inflows and assign every dollar a specific category before spending starts.",
+      "**Stage 2 - Track**: Record your transactions throughout the month using an automated sheet, app, or notepad to catch leaks early.",
+      "**Stage 3 - Review**: At the end of the month, compare your planned targets against your actual spend to see where you overspent or saved.",
+      "**Stage 4 - Adjust**: Adapt your numbers for the upcoming month based on upcoming expenses like midterms, holidays, or textbook requirements."
+    ]
+  },
+  {
+    "id": 5,
+    "title": "The Emergency Fund Ladder: Building Your Buffer in Stages",
+    "readTime": "4 MIN READ",
+    "content": [
+      "An emergency fund is the shock absorber of your financial life. Without it, a single unexpected laptop breakdown or dental visit can plunge a student into high-interest credit card debt.",
+      "**Stage 1 - The $100 Mini-Cushion**: The first milestone covers minor surprises like urgent parking tickets, prescription refills, or emergency course printing.",
+      "**Stage 2 - The $500 Safety Fortress**: The primary student milestone. Having $500 in a dedicated account shields you from 95% of common collegiate emergencies.",
+      "**Stage 3 - The 3-to-6 Month Reserve**: Post-graduation target covering 3 to 6 months of fixed living expenses for career transitions and security deposits."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Common Money Mistakes: The Stealth Leaks That Drain Your Cash",
+    "readTime": "4 MIN READ",
+    "content": [
+      "Most college students do not run out of money due to a single catastrophic event. Instead, finances bleed slowly through subtle daily habits.",
+      "**Food Delivery Surcharges**: A $14 dinner order easily escalates to $32 after service fees, driver tip, and menu markups. Ordering 3 times a week wastes over $2,000 per academic year.",
+      "**Zombie Subscriptions**: Free trials that auto-renew into recurring monthly charges without you noticing. Always set a cancellation reminder immediately after signing up.",
+      "**Spending Without a Plan**: Swiping your debit card without knowing your monthly envelope limits results in running out of money two weeks before the semester allowance refreshes."
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Saving vs. Investing: How Wealth Multiplies Over Time",
+    "readTime": "5 MIN READ",
+    "content": [
+      "Understanding the distinct roles of cash savings versus market investments is the foundation of long-term financial independence.",
+      "**Cash Savings for Safety**: Money in a high-yield savings account is safe and liquid. It protects your short-term goals and emergency funds from market volatility.",
+      "**The Inflation Drag on Cash**: Leaving all your money in cash guarantees a loss in purchasing power over decades due to inflation.",
+      "**Investing for Exponential Growth**: Buying shares in broad index funds and mutual funds allows your capital to compound alongside economic growth, doubling your purchasing power every 7-10 years on average."
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Debt Payoff Strategies: Snowball vs. Avalanche",
+    "readTime": "4 MIN READ",
+    "content": [
+      "When tackling multiple student balances, credit cards, or personal loans, having a structured mathematical or psychological payoff plan is essential.",
+      "**The Debt Snowball (Psychological Wins)**: List debts from smallest balance to largest. Pay minimums on all and throw extra cash at the smallest debt first. Clearing whole accounts quickly creates powerful momentum.",
+      "**The Debt Avalanche (Mathematical Efficiency)**: List debts by highest interest rate (APR) to lowest. Aggressively paying off the highest interest rate saves the maximum total interest over time.",
+      "**Which Should You Choose?**: If you need motivation and quick wins to stay on track, pick Snowball. If you are strictly numbers-focused and patient, pick Avalanche."
+    ]
+  },
+  {
+    "id": 9,
+    "title": "How Credit Scores Work: Anatomy of a FICO Score",
+    "readTime": "4 MIN READ",
+    "content": [
+      "Your credit score is a 3-digit number (300–850) that lenders, landlords, and even employers use to evaluate your financial reliability.",
+      "**Payment History (35%)**: The single largest factor. Never miss a payment deadline. Setting up automatic minimum payments protects this entirely.",
+      "**Credit Utilization (30%)**: The percentage of your credit limit you use. Keep your card balance below 30% (ideally under 10%) of your credit limit.",
+      "**Length of Credit History (15%)**: How long your accounts have been active. Keeping your oldest student credit card open with no annual fee boosts this over time.",
+      "**New Credit (10%) & Credit Mix (10%)**: Avoid applying for multiple new cards in a short window, and maintain a healthy mix of revolving and installment accounts."
+    ]
+  }
+]

@@ -1,13 +1,29 @@
+:root {
+  --bg-1: #ffffff;
+  --bg-2: #f0f0f0;
+  --border: rgba(26, 25, 25, 0.08);
+  --blue: #0922b0;
+  --blue-tint: rgba(9, 34, 176, 0.08);
+  --green: #0eb02c;
+  --green-tint: rgba(14, 176, 44, 0.08);
+  --rose: #d12828;
+  --rose-tint: rgba(209, 40, 40, 0.08);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-serif: 'Newsreader', 'Instrument Serif', Georgia, serif;
+}
+
 .stack-panel {
   position: sticky;
   top: 0;
   min-height: 100vh;
-  padding: 60px 40px;
+  padding: 40px 40px;
   box-sizing: border-box;
   background: linear-gradient(160deg, var(--bg-1), var(--bg-2));
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: var(--font-sans);
 }
 
 .team-members {
@@ -21,15 +37,18 @@
 .stack-panel-about-mission {
   z-index: 1;
 }
+
 .stack-panel-meet-team {
   z-index: 2;
 }
+
 .stack-panel-faq {
   z-index: 3;
 }
 
 p {
   margin-bottom: 30px;
+  font-family: var(--font-sans);
 }
 
 .about-text {
@@ -37,12 +56,65 @@ p {
   padding-left: 20px;
   border-left: 3px solid var(--border);
   text-align: center;
+  padding-bottom: 50px;
+  font-family: var(--font-sans);
+}
+
+.abouth {
+  font-family: var(--font-sans);
+  font-size: clamp(36px, 5vw, 54px);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  color: #1a1919;
+}
+
+.abouth1 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--green);
+}
+
+.about-text h1 {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #1a1919;
+  margin-top: 24px;
+}
+
+.about-h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(30px, 4vw, 40px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #1a1919;
+  line-height: 1.15;
+}
+
+.aboutp {
+  padding-top: 20px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(26, 25, 25, 0.75);
+}
+
+.team-text {
+  padding-top: 20px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(26, 25, 25, 0.75);
 }
 
 .about-text.accent-blue {
   border-left-color: var(--blue);
   padding-left: 120px;
 }
+
 .about-text.accent-green {
   width: 100%;
   max-width: 1300px;
@@ -56,11 +128,50 @@ p {
   align-items: center;
 }
 
+.stack-panel-faq h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #1a1919;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.tag-chip {
+  background: var(--blue-tint);
+  color: var(--blue);
+  border: 1px solid rgba(9, 34, 176, 0.25);
+}
+
 .tag-chip-green {
   background: var(--green-tint);
   color: var(--green);
+  border: 1px solid rgba(14, 176, 44, 0.25);
 }
+
 .tag-chip-rose {
   background: var(--rose-tint);
   color: var(--rose);
+  border: 1px solid rgba(209, 40, 40, 0.25);
+}
+
+@media (max-width: 768px) {
+  .about-text.accent-blue {
+    padding-left: 20px;
+  }
+  .team-members {
+    margin-left: 0;
+  }
 }

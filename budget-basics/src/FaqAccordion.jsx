@@ -22,7 +22,7 @@ export default function FaqAccordion() {
               aria-controls={`${item.id}-content`}
               id={`${item.id}-header`}
             >
-              <span>{item.question}</span>
+              <span className="question">{item.question}</span>
               <span className={`faq-icon ${isOpen ? "open" : ""}`}>›</span>
             </button>
             <div

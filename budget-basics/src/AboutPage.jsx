@@ -12,8 +12,10 @@ export default function AboutPage() {
       <section className="stack-panel stack-panel-about-mission">
         <span className="eyebrow tag-chip">01 · ABOUT US</span>
         <div className="about-text accent-blue">
-          <h1>About Budget Basics</h1>
-          <p>
+          <h1 className="abouth">
+            About <span className="abouth1">Budget Basics</span>
+          </h1>
+          <p className="aboutp">
             BudgetBasics was built by students, for students. We know what it's
             like to get a monthly allowance, a scholarship stipend, or your
             first part-time paycheck and have absolutely no idea where it went
@@ -21,8 +23,8 @@ export default function AboutPage() {
             habit at a time.
           </p>
 
-          <h2>Our Mission</h2>
-          <p>
+          <h1>Our Mission</h1>
+          <p className="aboutp">
             Our mission is simple: make budgeting feel less like homework and
             more like common sense. We believe financial literacy shouldn't be
             locked behind confusing jargon or expensive courses. Through simple
@@ -38,8 +40,8 @@ export default function AboutPage() {
       <section className="stack-panel stack-panel-meet-team">
         <span className="eyebrow tag-chip-green">02 · MEET THE TEAM</span>
         <div className="about-text accent-green">
-          <h2>Meet The Team</h2>
-          <p>
+          <h2 className="about-h2">Meet The Team</h2>
+          <p className="team-text">
             We're a team of Aptech ADSE students who combined what we're
             learning in frontend development and UI/UX design to build something
             we'd actually want to use ourselves.

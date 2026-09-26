@@ -1,0 +1,53 @@
+.chatbot-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  height: 60px;
+  width: 60px;
+  border-radius: var(--radius-pill);
+  background: var(--blue);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  z-index: 50;
+  overflow: hidden;
+  transition: width 0.2s ease;
+}
+
+.chatbot-fab-label {
+  color: #fff;
+  font-family: var(--inter);
+  font-weight: 600;
+  font-size: 14px;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  opacity: 1;
+  transform: scale(1);
+  position: absolute;
+}
+
+.chatbot-fab-label.fab-hidden {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.chatbot-fab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  position: absolute;
+}
+
+.chatbot-fab-icon.fab-visible {
+  opacity: 1;
+  transform: scale(1);
+}

@@ -37,15 +37,19 @@
   border-left: 3px solid var(--border);
   transition: border-color 0.3s ease;
 }
+
 .act-border-needs {
   border-left-color: var(--ink);
 }
+
 .act-border-wants {
   border-left-color: var(--rose);
 }
+
 .act-border-savings {
   border-left-color: var(--green);
 }
+
 .act-label {
   font-family: var(--mono);
   font-size: 0.8rem;

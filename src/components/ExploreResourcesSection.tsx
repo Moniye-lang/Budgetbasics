@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Search, 
   Download, 
@@ -200,19 +201,34 @@ export const ExploreResourcesSection: React.FC = () => {
               { id: 'software', label: 'Tech & Dev Packs' },
               { id: 'campus', label: 'Campus Hardware' },
               { id: 'lifestyle', label: 'Streaming & Food' }
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActivePerkCategory(tab.id as any)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  activePerkCategory === tab.id
-                    ? 'bg-[#1a1919] text-white shadow-xs scale-102'
-                    : 'bg-transparent text-[#1a1919]/70 hover:bg-[#f0f0f0] hover:text-[#1a1919]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+            ].map(tab => {
+              const isActive = activePerkCategory === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActivePerkCategory(tab.id as any)}
+                  className={`relative px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer select-none ${
+                    isActive
+                      ? 'text-white shadow-xs'
+                      : 'text-[#1a1919]/70 hover:text-[#1a1919] hover:bg-slate-200/70 active:scale-95'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="exploreCatPill"
+                      className="absolute inset-0 bg-[#1a1919] rounded-xl shadow-xs z-0"
+                      transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    <span>{tab.label}</span>
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    )}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Search Box */}

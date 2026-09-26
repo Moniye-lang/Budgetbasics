@@ -1,16 +1,26 @@
+:root {
+  --bb-surface: #ffffff;
+  --bb-text: #1a1919;
+  --bb-text-muted: rgba(26, 25, 25, 0.72);
+  --bb-border: rgba(26, 25, 25, 0.08);
+  --bb-rose: #d12828;
+  --bb-rose-light: rgba(209, 40, 40, 0.08);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 .faq-accordion {
-  max-width: 600px;
+  width: 100%;
+  max-width: 680px;
   margin: 0 auto;
-  background: var(--surface);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
+  background: #ffffff;
+  border: 1px solid var(--bb-border);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 1px 1px rgba(0, 0, 0, 0.02);
   overflow: hidden;
 }
 
 .faq-panel:not(:last-child) {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--bb-border);
 }
 
 .faq-summary {
@@ -18,31 +28,47 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 18px 24px;
   background: transparent;
   border: none;
   cursor: pointer;
-  font-family: var(--inter);
+  font-family: var(--font-sans);
   font-size: 15px;
+  font-weight: 700;
   text-align: left;
-  color: var(--text-h);
+  color: var(--bb-text);
+  transition: background-color 0.2s ease;
+}
+
+.faq-summary:hover {
+  background-color: rgba(209, 40, 40, 0.02);
 }
 
 .faq-icon {
-  display: inline-block;
-  transition: transform 0.2s ease;
-  font-size: 1.1rem;
-  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bb-rose-light);
+  color: var(--bb-rose);
+  font-size: 13px;
+  font-weight: 800;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
 .faq-icon.open {
   transform: rotate(90deg);
+  background: var(--bb-rose);
+  color: #ffffff;
 }
 
 .faq-details {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.25s ease;
+  transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #fafafa;
 }
 
 .faq-details.open {
@@ -50,11 +76,11 @@
 }
 
 .faq-details p {
-  padding: 16px;
+  padding: 16px 24px 20px;
   margin: 0;
-  font-family: var(--inter);
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text);
-  border-top: 1px solid var(--border);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--bb-text-muted);
+  border-top: 1px solid var(--bb-border);
 }

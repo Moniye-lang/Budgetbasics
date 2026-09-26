@@ -35,7 +35,8 @@ export default function BudgetRule() {
   });
 
   const act = budgetRule[active];
-  const images = act.images ?? (act.img ? [{ src: act.img, alt: act.alt }] : []);
+  const images =
+    act.images ?? (act.img ? [{ src: act.img, alt: act.alt }] : []);
   const image = images[activeImage % Math.max(images.length, 1)];
 
   useEffect(() => {
@@ -60,7 +61,9 @@ export default function BudgetRule() {
 
   const showPreviousImage = () => {
     if (images.length > 1) {
-      setActiveImage((current) => (current - 1 + images.length) % images.length);
+      setActiveImage(
+        (current) => (current - 1 + images.length) % images.length,
+      );
     }
   };
 
@@ -68,10 +71,14 @@ export default function BudgetRule() {
     <section id="budget" ref={targetRef} className="budget-section">
       <div className="budget-stage">
         <div className="title-text">
-          <span className="eyebrow">
+          <span className={`eyebrow budget-eyebrow budget-eyebrow-${active}`}>
             {String(active + 1).padStart(2, "0")} · LEARN BUDGETING
           </span>
-          <p className="head">The 50/30/20 Budgeting Rule</p>
+          <p className="head">
+            The <span className="fifty">50</span>/
+            <span className="thirty">30</span>/
+            <span className="twenty">20</span> Budgeting Rule
+          </p>
         </div>
 
         <div className="animation-container">
@@ -90,7 +97,11 @@ export default function BudgetRule() {
                 <p className="act-text">{act.text}</p>
                 <p className="act-tag">
                   <span className={`tag-dot ${dotClasses[active]}`} />
-                  <span className="tag-chip">{act.tag}</span>
+                  <span
+                    className={`tag-chip budget-tag-chip-${active}`}
+                  >
+                    {act.tag}
+                  </span>
                 </p>
               </motion.div>
             </AnimatePresence>
@@ -127,11 +138,21 @@ export default function BudgetRule() {
             )}
             {images.length > 1 && (
               <div className="carousel-controls">
-                <button type="button" onClick={showPreviousImage} aria-label="Previous image">
+                <button
+                  type="button"
+                  onClick={showPreviousImage}
+                  aria-label="Previous image"
+                >
                   ‹
                 </button>
-                <span>{activeImage + 1} / {images.length}</span>
-                <button type="button" onClick={showNextImage} aria-label="Next image">
+                <span>
+                  {activeImage + 1} / {images.length}
+                </span>
+                <button
+                  type="button"
+                  onClick={showNextImage}
+                  aria-label="Next image"
+                >
                   ›
                 </button>
               </div>

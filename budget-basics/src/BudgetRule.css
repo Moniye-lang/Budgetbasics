@@ -1,0 +1,180 @@
+.fifty {
+  color: var(--ink);
+}
+
+.thirty {
+  color: var(--rose);
+}
+
+.twenty {
+  color: var(--green);
+}
+
+.budget-section {
+  position: relative;
+  height: 300vh;
+}
+
+.budget-stage {
+  position: sticky;
+  top: 0;
+  width: 95vw;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.title-text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.animation-container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex: 1;
+}
+
+.animation-main {
+  flex: 1;
+}
+
+.act-content {
+  padding: 32px 40px 32px 12px;
+  border-left: 3px solid var(--border);
+  transition: border-color 0.3s ease;
+}
+.act-border-needs {
+  border-left-color: var(--ink);
+}
+.act-border-wants {
+  border-left-color: var(--rose);
+}
+.act-border-savings {
+  border-left-color: var(--green);
+}
+.budget-eyebrow-0 {
+  color: var(--ink);
+}
+.budget-eyebrow-1 {
+  color: var(--rose);
+}
+.budget-eyebrow-2 {
+  color: var(--green);
+}
+.budget-tag-chip-0 {
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+  color: var(--ink);
+}
+.budget-tag-chip-1 {
+  background: var(--rose-tint);
+  color: var(--rose);
+}
+.budget-tag-chip-2 {
+  background: var(--green-tint);
+  color: var(--green);
+}
+.act-label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.act-title {
+  margin-bottom: 12px;
+}
+
+.act-text {
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.act-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.budget-image {
+  position: relative;
+  width: calc(40% + 4px);
+  height: 100%;
+  margin-left: -14px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.budget-carousel-image,
+.budget-image-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.budget-image-placeholder {
+  background: var(--bg-2);
+}
+
+.carousel-controls {
+  position: absolute;
+  inset: auto 12px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--text-h);
+  font-family: var(--inter);
+  font-size: 13px;
+}
+
+.carousel-controls button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-h);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.progress-bar {
+  margin-top: 24px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--blue);
+  transform-origin: left;
+}

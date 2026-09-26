@@ -1,0 +1,27 @@
+[
+  {
+    "id": "panel1",
+    "question": "What is BudgetBasics?",
+    "answer": "BudgetBasics is a student-led initiative aimed at simplifying the budgeting process. We provide tools, guides, and resources to help students manage their finances effectively."
+  },
+  {
+    "id": "panel2",
+    "question": "Is my financial data saved anywhere?",
+    "answer": "No, BudgetBasics does not save any of your financial data. All information you enter is stored locally on your device and is never transmitted to any server."
+  },
+  {
+    "id": "panel3",
+    "question": "Is this a real budgeting app I can use with my actual bank account?",
+    "answer": "No — BudgetBasics is an educational tool, not a banking service. It's designed to teach budgeting concepts using sample numbers, not to manage real transactions."
+  },
+  {
+    "id": "panel4",
+    "question": "Can the AI chatbot answer any money question?",
+    "answer": "It's built to answer common budgeting basics (needs vs wants, saving tips, avoiding overspending). For anything outside that scope, it'll let you know rather than guess."
+  },
+  {
+    "id": "panel5",
+    "question": "Who is this site for?",
+    "answer": "Primarily students managing an allowance, scholarship, or part-time income for the first time — but honestly, anyone new to budgeting can use it."
+  }
+]

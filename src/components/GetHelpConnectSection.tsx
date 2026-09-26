@@ -39,7 +39,7 @@ export const GetHelpConnectSection: React.FC = () => {
   const [likedMsgId, setLikedMsgId] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const chatBottomRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,7 +58,9 @@ export const GetHelpConnectSection: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [messages, isTyping]);
 
   const presetPrompts = [
@@ -293,7 +295,7 @@ export const GetHelpConnectSection: React.FC = () => {
               </div>
 
               {/* Messages Scroll Area */}
-              <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-[#f0f0f0]/40">
+              <div ref={chatContainerRef} className="flex-1 p-6 overflow-y-auto space-y-4 bg-[#f0f0f0]/40">
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
@@ -373,8 +375,6 @@ export const GetHelpConnectSection: React.FC = () => {
                     </div>
                   </div>
                 )}
-
-                <div ref={chatBottomRef} />
               </div>
 
               {/* Chat Input Bar */}
