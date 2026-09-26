@@ -1,254 +1,657 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { 
-  CheckCircle2, 
+  ArrowRight, 
   RotateCcw, 
-  ArrowRight
-} from 'lucide-react';
+  ChevronRight, 
+  CheckCircle2, 
+} from "lucide-react";
+import {
+  allChallenges,
+  classifierDatabase,
+  DecisionChallenge,
+} from "../data/decisionDeckData";
+
+interface HistoryMove {
+  index: number;
+  wasSmart: boolean;
+  impact: number;
+  direction: "right" | "left" | "skip";
+  skipped?: boolean;
+}
+
+interface Bubble {
+  id: number;
+  size: number;
+  left: number;
+  duration: number;
+}
 
 interface NeedsVsWantsPageProps {
   onBackToHome?: () => void;
   onNavigateToPractice?: () => void;
+  onNavigateToBasics?: () => void;
 }
-
-interface CardItem {
-  id: string;
-  name: string;
-  category: string;
-  cost: number;
-  isNeed: boolean;
-  explanation: string;
-  icon: string;
-}
-
-const challengeCards: CardItem[] = [
-  { id: '1', name: 'Campus Textbook for Core Class', category: 'Education', cost: 75, isNeed: true, explanation: 'Required for course credits and coursework completion.', icon: '📚' },
-  { id: '2', name: 'Late-Night Food Delivery Surge', category: 'Food', cost: 28, isNeed: false, explanation: 'Convenience surge pricing — cooking dorm meal prep costs under $4.', icon: '🍔' },
-  { id: '3', name: 'Monthly Dorm Electricity & Wi-Fi', category: 'Housing', cost: 45, isNeed: true, explanation: 'Essential utility for living and studying.', icon: '⚡' },
-  { id: '4', name: 'Third Unused Video Streaming App', category: 'Entertainment', cost: 16, isNeed: false, explanation: 'Can be cancelled and rotated when watching a specific show.', icon: '🎬' },
-  { id: '5', name: 'Prescription Allergy Medication', category: 'Health', cost: 25, isNeed: true, explanation: 'Health maintenance is a non-negotiable personal priority.', icon: '💊' },
-  { id: '6', name: 'Designer Sneakers on Flash Sale', category: 'Shopping', cost: 140, isNeed: false, explanation: 'Impulse discount trap — wait 24h before buying non-essential apparel.', icon: '👟' },
-  { id: '7', name: 'Monthly Public Transit Metro Pass', category: 'Transit', cost: 50, isNeed: true, explanation: 'Essential for commuting to campus classes and part-time work.', icon: '🚇' },
-  { id: '8', name: 'Daily $7 Caramel Frappuccino', category: 'Dining', cost: 35, isNeed: false, explanation: 'Brewing campus coffee saves $120+ every month.', icon: '☕' }
-];
 
 export const NeedsVsWantsPage: React.FC<NeedsVsWantsPageProps> = ({
-  onNavigateToPractice
+  onNavigateToPractice,
+  onNavigateToBasics,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [feedback, setFeedback] = useState<{ isCorrect: boolean; text: string } | null>(null);
-  const [isFinished, setIsFinished] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [filteredDeck, setFilteredDeck] = useState<DecisionChallenge[]>(allChallenges);
 
-  const currentCard = challengeCards[currentIndex];
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [userScore, setUserScore] = useState(0);
+  const [ledgerBalance, setLedgerBalance] = useState(50000);
+  const [totalAvoidedDebt, setTotalAvoidedDebt] = useState(0);
+  const [historyStack, setHistoryStack] = useState<HistoryMove[]>([]);
+  const [cardAnimations, setCardAnimations] = useState<Record<number, string>>({});
 
-  const handleClassify = (userSaidNeed: boolean) => {
-    if (!currentCard || isFinished) return;
+  const [popupData, setPopupData] = useState({
+    isOpen: false,
+    isSmart: true,
+    isFinal: false,
+    title: "",
+    message: "",
+    impactText: "",
+    icon: "🛡️",
+  });
 
-    const isCorrect = currentCard.isNeed === userSaidNeed;
-    if (isCorrect) setScore((prev) => prev + 1);
+  const [activeClassifier, setActiveClassifier] = useState("groceries");
+  const [bubbles, setBubbles] = useState<Bubble[]>([]);
 
-    setFeedback({
-      isCorrect,
-      text: currentCard.explanation
-    });
+  const runwayMonths = (ledgerBalance / 13000).toFixed(1);
+  const currentDisplay = Math.min(currentCardIndex + 1, filteredDeck.length);
+  const progressPct = filteredDeck.length ? (currentDisplay / filteredDeck.length) * 100 : 0;
+  const currentClassData = classifierDatabase[activeClassifier] || classifierDatabase.groceries;
+
+  const triggerBubbles = (amount = 25) => {
+    const newBubbles: Bubble[] = Array.from({ length: amount }, (_, index) => ({
+      id: Date.now() + index,
+      size: Math.random() * 30 + 12,
+      left: Math.random() * 95,
+      duration: Math.random() * 2.5 + 2.5,
+    }));
+
+    setBubbles((previous) => [...previous, ...newBubbles]);
+
+    window.setTimeout(() => {
+      setBubbles((previous) =>
+        previous.filter((b) => !newBubbles.some((nb) => nb.id === b.id))
+      );
+    }, 5500);
   };
 
-  const handleNext = () => {
-    setFeedback(null);
-    if (currentIndex < challengeCards.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
+  const handleFilterCategory = (category: string) => {
+    setSelectedCategory(category);
+    setFilteredDeck(
+      category === "all"
+        ? allChallenges
+        : allChallenges.filter((item) => item.category === category)
+    );
+    setCurrentCardIndex(0);
+    setCardAnimations({});
+    setHistoryStack([]);
+  };
+
+  const handleDecision = (index: number, optionIndex: number) => {
+    const cardData = filteredDeck[index];
+    if (!cardData) return;
+
+    const chosen = cardData.options[optionIndex];
+    const isSmart = chosen.type === "smart";
+
+    if (isSmart) {
+      const otherImpact = Math.abs(cardData.options[1 - optionIndex].impact || 4000);
+      setUserScore((previous) => previous + 1);
+      setTotalAvoidedDebt((previous) => previous + otherImpact);
+      setLedgerBalance((previous) => previous + 2000);
+      setCardAnimations((previous) => ({
+        ...previous,
+        [index]: "slide-out-right",
+      }));
+      triggerBubbles(20);
     } else {
-      setIsFinished(true);
+      setLedgerBalance((previous) => Math.max(8000, previous - 3500));
+      setCardAnimations((previous) => ({
+        ...previous,
+        [index]: "slide-out-left",
+      }));
+    }
+
+    setHistoryStack((previous) => [
+      ...previous,
+      {
+        index,
+        wasSmart: isSmart,
+        impact: chosen.impact,
+        direction: isSmart ? "right" : "left",
+      },
+    ]);
+
+    window.setTimeout(() => {
+      setPopupData({
+        isOpen: true,
+        isSmart,
+        isFinal: false,
+        title: isSmart ? "Disciplined Move!" : "Opportunity Cost",
+        message: isSmart ? cardData.smartFeedback : cardData.wantFeedback,
+        impactText: isSmart
+          ? "RUNWAY BENEFIT: +₦2,000 preserved"
+          : "OPPORTUNITY COST: -₦3,500 from runway",
+        icon: isSmart ? "🛡️" : "💡",
+      });
+    }, 220);
+  };
+
+  const handleSkipCard = () => {
+    if (currentCardIndex >= filteredDeck.length - 1) return;
+
+    setCardAnimations((previous) => ({
+      ...previous,
+      [currentCardIndex]: "slide-out-skip",
+    }));
+
+    setHistoryStack((previous) => [
+      ...previous,
+      {
+        index: currentCardIndex,
+        wasSmart: false,
+        skipped: true,
+        direction: "skip",
+        impact: 0,
+      },
+    ]);
+
+    window.setTimeout(() => {
+      setCurrentCardIndex((previous) => previous + 1);
+    }, 250);
+  };
+
+  const handleUndoCard = () => {
+    if (currentCardIndex <= 0 || historyStack.length === 0) return;
+
+    const newStack = [...historyStack];
+    const lastMove = newStack.pop();
+    if (!lastMove) return;
+
+    if (lastMove.wasSmart) {
+      setUserScore((previous) => Math.max(0, previous - 1));
+      setLedgerBalance((previous) => previous - 2000);
+    } else if (!lastMove.skipped) {
+      setLedgerBalance((previous) => previous + 3500);
+    }
+
+    const previousIndex = currentCardIndex - 1;
+    const reverseClass =
+      lastMove.direction === "left"
+        ? "slide-in-left-reverse"
+        : lastMove.direction === "skip"
+          ? "slide-in-skip-reverse"
+          : "slide-in-right-reverse";
+
+    setCardAnimations((previous) => ({
+      ...previous,
+      [previousIndex]: reverseClass,
+    }));
+
+    setCurrentCardIndex(previousIndex);
+    setHistoryStack(newStack);
+
+    window.setTimeout(() => {
+      setCardAnimations((previous) => {
+        const copy = { ...previous };
+        delete copy[previousIndex];
+        return copy;
+      });
+    }, 500);
+  };
+
+  const handleClosePopup = () => {
+    setPopupData((previous) => ({
+      ...previous,
+      isOpen: false,
+    }));
+
+    const nextIndex = currentCardIndex + 1;
+    if (nextIndex >= filteredDeck.length) {
+      setPopupData({
+        isOpen: true,
+        isSmart: true,
+        isFinal: true,
+        title: "Simulation Complete!",
+        message: `You made ${userScore} disciplined choices and protected approximately ₦${totalAvoidedDebt.toLocaleString()}.`,
+        impactText: `FINAL RUNWAY: ${runwayMonths} months`,
+        icon: "🏆",
+      });
+      triggerBubbles(45);
+    } else {
+      setCurrentCardIndex(nextIndex);
     }
   };
 
-  const handleReset = () => {
-    setCurrentIndex(0);
-    setScore(0);
-    setFeedback(null);
-    setIsFinished(false);
-  };
-
   return (
-    <div className="min-h-screen bg-[#f0f0f0] text-[#1a1919] font-sans antialiased pb-24 relative">
-      
-      {/* Sub-Header Breadcrumb */}
+    <div className="relative min-h-screen bg-[#f0f0f0] pb-24 font-sans text-[#1a1919] antialiased selection:bg-[#0922b0]/20 selection:text-[#0922b0]">
+      {/* Celebration Bubbles */}
+      <div className="pointer-events-none fixed inset-0 z-[450] overflow-hidden">
+        {bubbles.map((bubble) => (
+          <div
+            key={bubble.id}
+            className="bubble"
+            style={{
+              width: `${bubble.size}px`,
+              height: `${bubble.size}px`,
+              left: `${bubble.left}%`,
+              animationDuration: `${bubble.duration}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Sub-Header Breadcrumb & Runway Bar */}
       <div className="border-b border-[#1a1919]/8 bg-white/70 backdrop-blur-md sticky top-[68px] z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-[11px] font-mono font-bold uppercase text-[#0eb02c] bg-[#0eb02c]/10 px-2.5 py-1 rounded-lg border border-[#0eb02c]/20">
               01 · Learn Module
             </span>
-            <span className="text-xs text-[#1a1919]/60 font-medium">
-              / Needs vs. Wants Interactive Classification Engine
+            <span className="hidden sm:inline text-xs text-[#1a1919]/60 font-medium">
+              / Needs vs Wants Engine & 30-Card Decision Simulator
             </span>
           </div>
-          <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#0eb02c] bg-white px-3 py-1.5 rounded-xl border border-[#1a1919]/10 shadow-xs">
-            SIMULATOR ACTIVE
+
+          <div className="flex items-center gap-3">
+            {onNavigateToBasics && (
+              <button
+                onClick={onNavigateToBasics}
+                className="hidden sm:inline-flex text-xs font-semibold text-[#1a1919]/70 hover:text-[#0922b0] transition cursor-pointer"
+              >
+                ← Back to Cash Flow Basics
+              </button>
+            )}
+
+            <div className="rounded-xl border border-[#0eb02c]/20 bg-[#edf9ef] px-3 py-1 text-xs font-mono font-bold text-[#0eb02c] shadow-xs">
+              RUNWAY: <span>{runwayMonths} Mo</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-12">
-        
-        {/* 1. Hero Introduction */}
-        <section className="bg-white rounded-3xl p-8 sm:p-10 border border-[#1a1919]/10 shadow-sm relative overflow-hidden">
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0eb02c]/10 border border-[#0eb02c]/20 text-xs font-mono font-bold text-[#0eb02c]">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>DISCRETIONARY CLASSIFIER</span>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-[#1a1919] leading-tight">
-              Needs vs. Wants <span className="text-[#0eb02c]">Decision Engine</span>
-            </h1>
-            <p className="text-sm sm:text-base text-[#1a1919]/75 leading-relaxed font-medium">
-              The difference between financial stress and a stress-free semester comes down to how quickly you recognize an artificial want disguised as an urgent need.
-            </p>
+      {/* Hero Banner */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
+        <div className="max-w-3xl space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0eb02c]/10 border border-[#0eb02c]/20 text-xs font-mono font-bold text-[#0eb02c]">
+            <CheckCircle2 className="w-3.5 h-3.5" />
+            <span>IMPULSE CONTROL SIMULATOR</span>
           </div>
-        </section>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-[#1a1919] leading-tight">
+            Separate Needs from Wants. <br />
+            <span className="font-serif italic font-normal text-[#0eb02c]">Master everyday choices.</span>
+          </h1>
+          <p className="text-sm sm:text-base text-[#1a1919]/75 font-medium leading-relaxed">
+            Every choice either builds your survival runway or triggers lifestyle creep. Test yourself against 30 real-world scenarios.
+          </p>
+        </div>
+      </section>
 
-        {/* 2. Interactive Simulator Card */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Card Simulator Player */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-[#1a1919]/10 shadow-sm space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-[#1a1919]/10">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-bold text-[#0eb02c]">
-                  CARD {currentIndex + 1} OF {challengeCards.length}
-                </span>
-              </div>
-              <div className="font-mono text-xs font-bold text-[#0922b0] bg-[#0922b0]/10 px-2.5 py-1 rounded-lg">
-                SCORE: {score}/{challengeCards.length}
-              </div>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        
+        {/* 1. Money Decision Challenge (Screenshot 3) */}
+        <section id="challenge" className="scroll-mt-24 space-y-6 pt-2">
+          <div className="mx-auto max-w-2xl space-y-2 text-center">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1a1919] tracking-tight">
+              Money Decision Challenge
+            </h2>
+
+            <p className="text-sm sm:text-base text-[#1a1919]/70 leading-relaxed font-medium">
+              Choose wisely and watch your runway change.
+            </p>
+
+            {/* Filter Pills */}
+            <div className="flex flex-wrap justify-center gap-2 pt-3">
+              {[
+                { id: "all", label: "All 30" },
+                { id: "inflow", label: "Inflows" },
+                { id: "survival", label: "Survival" },
+                { id: "peer", label: "Peer Boundaries" },
+                { id: "tools", label: "Tools" },
+              ].map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => handleFilterCategory(category.id)}
+                  className={`rounded-full px-4 py-2 text-xs font-semibold transition cursor-pointer ${
+                    selectedCategory === category.id
+                      ? "bg-[#1a1919] font-bold text-white shadow-xs"
+                      : "border border-[#dedede] bg-white text-[#1a1919]/75 hover:bg-slate-50"
+                  }`}
+                >
+                  {category.label}
+                </button>
+              ))}
             </div>
 
-            {!isFinished ? (
-              <div className="space-y-6">
-                {/* Active Card Display */}
-                <div className="p-8 rounded-3xl bg-[#f0f0f0] border border-[#1a1919]/10 text-center space-y-4 shadow-inner">
-                  <div className="text-6xl">{currentCard.icon}</div>
+            {/* Progress Row */}
+            <div className="flex items-center justify-center gap-3 pt-3 text-xs font-mono text-[#1a1919]/70">
+              <span>
+                CARD: <strong className="text-[#1a1919] font-bold">{currentDisplay}</strong> / {filteredDeck.length}
+              </span>
+
+              <div className="h-2 w-32 sm:w-44 overflow-hidden rounded-full bg-[#dedede]">
+                <div
+                  className="h-full bg-[#0922b0] transition-all duration-300"
+                  style={{ width: `${progressPct}%` }}
+                />
+              </div>
+
+              <span>
+                SMART: <strong className="text-[#0eb02c] font-bold">{userScore}</strong>
+              </span>
+            </div>
+          </div>
+
+          {/* 3D Overlapping Kinetic Deck Container */}
+          <div className="deck-container">
+            {filteredDeck.map((challenge, index) => {
+              const difference = index - currentCardIndex;
+              let positionClass = "pos-hidden";
+
+              if (difference === 0) positionClass = "pos-0";
+              if (difference === 1) positionClass = "pos-1";
+              if (difference === 2) positionClass = "pos-2";
+
+              return (
+                <div
+                  key={challenge.id}
+                  className={`stack-card ${challenge.bg} ${positionClass} ${
+                    cardAnimations[index] || ""
+                  } flex flex-col justify-between p-6 sm:p-10 border shadow-xl`}
+                >
                   <div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1a1919]/60 px-2.5 py-1 rounded-md bg-white border border-[#1a1919]/10">
-                      {currentCard.category}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-black text-[#1a1919] mt-2">
-                      {currentCard.name}
-                    </h3>
+                    <div className="flex items-center justify-between gap-3">
+                      <span
+                        className={`${challenge.badge} text-xs font-mono font-bold uppercase tracking-wider`}
+                      >
+                        {challenge.tag}
+                      </span>
+
+                      <span className="text-xs font-mono opacity-60">
+                        #{challenge.id} of 30
+                      </span>
+                    </div>
+
+                    <h4 className="mt-4 text-2xl sm:text-4xl font-extrabold leading-tight tracking-tight">
+                      {challenge.title}
+                    </h4>
+
+                    <p className="mt-4 text-sm sm:text-base leading-relaxed opacity-85">
+                      {challenge.scenario}
+                    </p>
                   </div>
-                  <div className="text-2xl font-mono font-black text-[#0922b0]">
-                    ${currentCard.cost}
+
+                  <div className="mt-8 flex flex-col gap-3.5 border-t border-black/10 pt-6 sm:flex-row">
+                    <button
+                      onClick={() => handleDecision(index, 0)}
+                      className={`flex-1 rounded-2xl px-5 py-4 text-xs sm:text-sm font-bold shadow-md transition active:scale-95 cursor-pointer ${
+                        challenge.options[0].type === "smart"
+                          ? "bg-[#1a1919] text-white hover:bg-black"
+                          : "bg-[#0922b0] text-white hover:bg-[#071a8a]"
+                      }`}
+                    >
+                      {challenge.options[0].text}
+                    </button>
+
+                    <button
+                      onClick={() => handleDecision(index, 1)}
+                      className={`flex-1 rounded-2xl border px-5 py-4 text-xs sm:text-sm font-bold transition active:scale-95 cursor-pointer ${
+                        challenge.options[1].type === "smart"
+                          ? "border-slate-300 bg-white text-[#1a1919] hover:bg-slate-50"
+                          : "border-slate-300 bg-slate-100 text-[#1a1919] hover:bg-white"
+                      }`}
+                    >
+                      {challenge.options[1].text}
+                    </button>
                   </div>
                 </div>
-
-                {/* Answer Feedback Alert */}
-                {feedback ? (
-                  <div className={`p-4 rounded-2xl border text-xs font-semibold space-y-3 animate-in fade-in ${
-                    feedback.isCorrect ? 'bg-[#0eb02c]/10 border-[#0eb02c]/30 text-[#0eb02c]' : 'bg-[#d12828]/10 border-[#d12828]/30 text-[#d12828]'
-                  }`}>
-                    <div className="flex items-center gap-2 font-bold text-sm">
-                      <span>{feedback.isCorrect ? '✓ Spot on!' : '✕ Caution:'}</span>
-                      <span className="text-[#1a1919]">{feedback.text}</span>
-                    </div>
-                    <button
-                      onClick={handleNext}
-                      className="w-full py-2.5 rounded-xl bg-[#1a1919] hover:bg-[#0922b0] text-white font-bold text-xs transition-all cursor-pointer"
-                    >
-                      Continue to Next Item →
-                    </button>
-                  </div>
-                ) : (
-                  /* Action Buttons: Need or Want */
-                  <div className="grid grid-cols-2 gap-4">
-                    <button
-                      onClick={() => handleClassify(true)}
-                      className="py-4 rounded-2xl bg-[#0eb02c] hover:bg-[#0c9625] text-white font-bold text-sm shadow-md transition-all cursor-pointer hover:scale-102 active:scale-95 flex items-center justify-center gap-2"
-                    >
-                      <span>🟢 Non-Negotiable Need</span>
-                    </button>
-                    <button
-                      onClick={() => handleClassify(false)}
-                      className="py-4 rounded-2xl bg-[#d12828] hover:bg-[#b02222] text-white font-bold text-sm shadow-md transition-all cursor-pointer hover:scale-102 active:scale-95 flex items-center justify-center gap-2"
-                    >
-                      <span>🔴 Discretionary Want</span>
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              /* Completion Screen */
-              <div className="py-10 text-center space-y-4">
-                <div className="text-6xl">🏆</div>
-                <h3 className="text-2xl font-black text-[#1a1919]">Simulation Complete!</h3>
-                <p className="text-sm text-[#1a1919]/75 font-medium max-w-md mx-auto">
-                  You scored <strong className="text-[#0eb02c] font-black font-mono">{score} out of {challengeCards.length}</strong> correct classifications.
-                </p>
-                <button
-                  onClick={handleReset}
-                  className="px-6 py-3 rounded-xl bg-[#0922b0] hover:bg-[#071a8a] text-white font-bold text-xs inline-flex items-center gap-2 shadow-md cursor-pointer"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  <span>Restart Challenge</span>
-                </button>
-              </div>
-            )}
+              );
+            })}
           </div>
 
-          {/* 3. The 24-Hour Pause Decision Flowchart */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-[#1a1919]/10 shadow-sm space-y-5">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#0922b0]" />
-              <h3 className="font-bold text-base text-[#1a1919]">The 4-Step 24h Pause Matrix</h3>
-            </div>
-            <p className="text-xs text-[#1a1919]/70 leading-relaxed font-medium">
-              When tempted by an unplanned expense over $20, apply this visual filter:
+          {/* Bottom Card Controls */}
+          <div className="mx-auto flex max-w-[700px] items-center justify-between px-2 pt-2">
+            <button
+              onClick={handleUndoCard}
+              disabled={currentCardIndex <= 0}
+              className={`flex items-center gap-1.5 rounded-2xl border px-4 py-2.5 text-xs font-semibold shadow-xs transition cursor-pointer ${
+                currentCardIndex > 0
+                  ? "border-[#dedede] bg-white text-[#1a1919] hover:bg-slate-50"
+                  : "cursor-not-allowed border-[#dedede]/50 bg-slate-100 text-slate-400"
+              }`}
+            >
+              <RotateCcw className="h-3.5 w-3.5" />
+              <span>Previous</span>
+            </button>
+
+            <span className="hidden sm:inline text-xs font-mono text-[#1a1919]/50">
+              Smart → Right | Want → Left
+            </span>
+
+            <button
+              onClick={handleSkipCard}
+              disabled={currentCardIndex >= filteredDeck.length - 1}
+              className={`flex items-center gap-1.5 rounded-2xl border px-4 py-2.5 text-xs font-semibold shadow-xs transition cursor-pointer ${
+                currentCardIndex < filteredDeck.length - 1
+                  ? "border-[#dedede] bg-white text-[#1a1919] hover:bg-slate-50"
+                  : "cursor-not-allowed border-[#dedede]/50 bg-slate-100 text-slate-400"
+              }`}
+            >
+              <span>Skip</span>
+              <ChevronRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </section>
+
+        {/* 2. Needs vs Wants Simple Classification */}
+        <section id="needs-wants-matrix" className="scroll-mt-24 space-y-6">
+          <div className="mx-auto max-w-2xl space-y-2 text-center">
+            <p className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#0eb02c]">
+              SIMPLE CLASSIFICATION
             </p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1a1919]">
+              Needs vs Wants
+            </h2>
+            <p className="text-xs sm:text-sm text-[#1a1919]/70 leading-relaxed font-medium">
+              Use these quick checks before spending.
+            </p>
+          </div>
 
-            <div className="space-y-3">
-              <div className="p-3.5 rounded-2xl bg-[#f0f0f0] border border-[#1a1919]/10 text-xs space-y-1">
-                <span className="font-mono font-bold text-[#0922b0] text-[11px]">STEP 1 · IDENTIFY</span>
-                <p className="font-medium text-[#1a1919]">Will this item cause academic harm or health risk if you don't buy it today?</p>
+          <div className="overflow-hidden rounded-3xl border border-[#dedede] bg-white shadow-sm">
+            <div className="grid grid-cols-2 border-b border-[#dedede] text-center text-xs font-bold">
+              <div className="bg-[#edf9ef] p-4 text-[#0eb02c]">
+                Essential Needs
+              </div>
+              <div className="bg-[#f7f7f5] p-4 text-[#1a1919]">
+                Optional Wants
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 divide-x divide-[#dedede] text-xs">
+              <div className="space-y-3 p-5 sm:p-6 text-[#1a1919]/80 font-medium">
+                <p>✓ Supports basic biological or academic living.</p>
+                <p>✓ Usually difficult to postpone without major penalties.</p>
+                <p>✓ Protects health, shelter, safety, or core courses.</p>
+                <p>✓ Should receive first priority upon allowance credit.</p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-[#f0f0f0] border border-[#1a1919]/10 text-xs space-y-1">
-                <span className="font-mono font-bold text-[#0eb02c] text-[11px]">STEP 2 · 24-HOUR CLOCK</span>
-                <p className="font-medium text-[#1a1919]">If it is a Want, close the app and wait 24 hours. 82% of impulse urges disappear overnight.</p>
-              </div>
-
-              <div className="p-3.5 rounded-2xl bg-[#f0f0f0] border border-[#1a1919]/10 text-xs space-y-1">
-                <span className="font-mono font-bold text-[#d12828] text-[11px]">STEP 3 · WORK HOUR COMPARISON</span>
-                <p className="font-medium text-[#1a1919]">Divide the price by your hourly wage. Is that jacket worth 8 hours of campus work?</p>
-              </div>
-
-              <div className="p-3.5 rounded-2xl bg-[#0922b0]/5 border border-[#0922b0]/20 text-xs space-y-1">
-                <span className="font-mono font-bold text-[#0922b0] text-[11px]">STEP 4 · INTENTIONAL DECISION</span>
-                <p className="font-medium text-[#1a1919]">If you still want it after 24h, buy it guilt-free from your 30% Wants envelope.</p>
+              <div className="space-y-3 p-5 sm:p-6 text-[#1a1919]/80 font-medium">
+                <p>✕ Can usually be delayed 24 to 48 hours safely.</p>
+                <p>✕ Often has free or low-cost campus alternatives.</p>
+                <p>✕ Often driven by temporary stress or peer impulse.</p>
+                <p>✕ Should only be funded from remaining 30% allowance.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 4. CTA to Practice Studio */}
-        <section className="bg-[#0922b0] rounded-3xl p-8 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="space-y-2 max-w-xl text-center md:text-left">
-            <h3 className="text-2xl sm:text-3xl font-black">Ready to apply Needs vs Wants in your budget?</h3>
-            <p className="text-xs sm:text-sm text-white/80">
-              Open the 50/30/20 Practice Studio to balance your essential outlays against your guilt-free lifestyle allowance.
+        {/* 3. Interactive Quick Outflow Classifier */}
+        <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#dedede] shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#0922b0]">
+                INTERACTIVE TOOL
+              </p>
+              <h3 className="mt-1 text-xl font-bold text-[#1a1919]">Quick Outflow Classifier</h3>
+              <p className="mt-1 text-xs text-[#1a1919]/60 font-medium">
+                Select an expense to inspect its classification and decision rule.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {[
+                { key: "groceries", label: "Groceries" },
+                { key: "delivery", label: "Food Delivery" },
+                { key: "antibiotics", label: "Medicine" },
+                { key: "sneakers", label: "Sneakers" },
+              ].map((item) => (
+                <button
+                  key={item.key}
+                  onClick={() => setActiveClassifier(item.key)}
+                  className={`rounded-xl px-3.5 py-2 text-xs font-semibold transition cursor-pointer ${
+                    activeClassifier === item.key
+                      ? "bg-[#1a1919] text-white shadow-xs"
+                      : "bg-[#f7f7f5] text-[#1a1919]/80 hover:bg-slate-200 border border-[#dedede]/60"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Classification", currentClassData.cls],
+              ["Postponability", currentClassData.postpone],
+              ["Free Substitute", currentClassData.sub],
+              ["Action", currentClassData.act],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="rounded-2xl border border-[#dedede]/60 bg-[#f7f7f5] p-4 space-y-1"
+              >
+                <span className="block text-[10px] font-mono font-bold uppercase text-[#1a1919]/50">
+                  {label}
+                </span>
+                <strong className="block text-sm text-[#1a1919]">
+                  {value}
+                </strong>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 4. Pause Before You Purchase Framework */}
+        <section className="scroll-mt-24 space-y-6">
+          <div className="mx-auto max-w-2xl space-y-2 text-center">
+            <p className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#0922b0]">
+              BEFORE YOU SPEND
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1a1919]">
+              Pause Before You Purchase
+            </h2>
+            <p className="text-xs sm:text-sm text-[#1a1919]/70 font-medium">
+              Four quick questions to run through whenever an impulse strikes.
             </p>
           </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                step: "01",
+                q: "Do I already own something that solves this?",
+                desc: "Check your dorm room, closet, or kitchen before ordering duplicate items.",
+              },
+              {
+                step: "02",
+                q: "Can I wait 24 to 48 hours?",
+                desc: "75% of online shopping desires dissolve once the initial dopamine spike settles.",
+              },
+              {
+                step: "03",
+                q: "Will this deplete my emergency buffer?",
+                desc: "If this purchase leaves you below ₦10,000 for unexpected bills, hold off.",
+              },
+              {
+                step: "04",
+                q: "Is this my priority or peer pressure?",
+                desc: "Never let someone else's allowance level dictate your monthly budget boundaries.",
+              },
+            ].map((card) => (
+              <div
+                key={card.step}
+                className="rounded-3xl border border-[#dedede] bg-white p-6 shadow-sm space-y-3"
+              >
+                <span className="font-mono text-xs font-bold text-[#0922b0]">
+                  {card.step}
+                </span>
+                <h4 className="text-sm font-bold text-[#1a1919] leading-snug">
+                  {card.q}
+                </h4>
+                <p className="text-xs text-[#1a1919]/70 leading-relaxed font-medium">
+                  {card.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Bottom CTA to Practice Studio */}
+        <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#dedede] shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div>
+            <h3 className="font-bold text-lg text-[#1a1919]">Ready to design your personal budget?</h3>
+            <p className="text-xs text-[#1a1919]/60 font-medium">Take your discipline into the interactive 50/30/20 Studio and Savings Goal calculator.</p>
+          </div>
+
           <button
-            onClick={() => {
-              if (onNavigateToPractice) onNavigateToPractice();
-              else window.location.hash = '#expense-planner';
-            }}
-            className="px-6 py-3.5 bg-[#0eb02c] hover:bg-[#0c9626] text-white text-xs font-bold rounded-xl shadow-lg flex items-center gap-2 cursor-pointer transition-all shrink-0 active:scale-95"
+            onClick={onNavigateToPractice}
+            className="px-6 py-3 rounded-xl bg-[#0922b0] hover:bg-[#071a8a] text-white text-xs font-bold flex items-center gap-2 shadow-md transition-all cursor-pointer whitespace-nowrap"
           >
-            <span>Open Practice Studio</span>
+            <span>Launch 50/30/20 Studio</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </section>
 
       </main>
+
+      {/* Feedback & Result Popup Modal */}
+      {popupData.isOpen && (
+        <div className="fixed inset-0 z-[500] flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
+          <div className="w-full max-w-md space-y-4 rounded-3xl border border-[#dedede] bg-white p-6 sm:p-8 shadow-2xl">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl">{popupData.icon}</span>
+              <div>
+                <h4 className="text-lg font-bold text-[#1a1919]">{popupData.title}</h4>
+                <span
+                  className={`text-[11px] font-mono font-bold ${
+                    popupData.isSmart ? "text-[#0eb02c]" : "text-[#d12828]"
+                  }`}
+                >
+                  {popupData.impactText}
+                </span>
+              </div>
+            </div>
+
+            <p className="text-xs sm:text-sm leading-relaxed text-[#1a1919]/80 font-medium">
+              {popupData.message}
+            </p>
+
+            <button
+              onClick={handleClosePopup}
+              className="w-full rounded-2xl bg-[#1a1919] py-3.5 text-xs font-bold text-white transition hover:bg-black cursor-pointer shadow-md"
+            >
+              {popupData.isFinal ? "Celebrate & Close" : "Continue Simulation →"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

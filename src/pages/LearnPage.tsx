@@ -11,6 +11,7 @@ import {
   rotatingTips,
   DecisionChallenge,
 } from "../data/decisionDeckData";
+import BudgetRule from "../BudgetRule";
 
 interface HistoryMove {
   index: number;
@@ -519,6 +520,25 @@ export const LearnPage: React.FC<LearnPageProps> = () => {
       </section>
 
       <main className="mx-auto max-w-7xl space-y-16 px-4 sm:px-6 lg:px-8">
+        {/* The 50/30/20 Animated Stage */}
+        <section id="budget-rule-stage" className="scroll-mt-24 space-y-6">
+          <div className="mx-auto max-w-2xl space-y-2 text-center">
+            <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#0922b0]">
+              The Foundational Rule
+            </p>
+            <h2 className="text-2xl font-extrabold md:text-4xl">
+              The 50/30/20 Budgeting Rule
+            </h2>
+            <p className="text-xs leading-relaxed text-[#1a1919]/70 sm:text-sm">
+              Scroll through the stage below to see how essentials, lifestyle, and savings interact.
+            </p>
+          </div>
+
+          <div className="rounded-3xl border border-[#1a1919]/10 shadow-sm bg-white overflow-hidden">
+            <BudgetRule />
+          </div>
+        </section>
+
         {/* Cash Flow */}
         <section id="inflow-outflow" className="scroll-mt-24 space-y-6">
           <div className="mx-auto max-w-2xl space-y-2 text-center">
@@ -536,55 +556,55 @@ export const LearnPage: React.FC<LearnPageProps> = () => {
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            <div className="space-y-4 rounded-3xl border border-blue-100 bg-gradient-to-br from-white to-blue-50/40 p-5 shadow-sm sm:p-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-5 rounded-3xl border border-[#dedede] bg-white p-6 sm:p-8 shadow-sm">
               <div>
-                <h3 className="font-bold">Money In</h3>
-                <p className="mt-1 text-xs text-[#1a1919]/60">
+                <h3 className="text-xl font-bold text-[#1a1919]">Money In</h3>
+                <p className="mt-1 text-xs text-[#1a1919]/60 font-medium">
                   Common income sources
                 </p>
               </div>
 
-              <ul className="space-y-2 text-xs">
+              <div className="space-y-3">
                 {[
                   "Family allowances",
                   "Freelance and side gigs",
                   "Gifts and windfalls",
                   "Scholarships and stipends",
                 ].map((item) => (
-                  <li
+                  <div
                     key={item}
-                    className="rounded-xl border border-slate-200 bg-white p-3"
+                    className="rounded-2xl border border-[#dedede]/80 bg-[#fbfbfb] p-4 text-xs font-semibold text-[#1a1919] hover:border-[#0922b0]/40 hover:bg-white transition-all shadow-xs"
                   >
                     {item}
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            <div className="space-y-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <div className="space-y-5 rounded-3xl border border-[#dedede] bg-white p-6 sm:p-8 shadow-sm">
               <div>
-                <h3 className="font-bold">Money Out</h3>
-                <p className="mt-1 text-xs text-[#1a1919]/60">
+                <h3 className="text-xl font-bold text-[#1a1919]">Money Out</h3>
+                <p className="mt-1 text-xs text-[#1a1919]/60 font-medium">
                   Give each expense a priority
                 </p>
               </div>
 
-              <ul className="space-y-2 text-xs">
+              <div className="space-y-3">
                 {[
                   "Needs: food, housing, transport",
                   "Savings: emergency buffer",
                   "Growth: school and useful tools",
                   "Wants: entertainment and outings",
                 ].map((item) => (
-                  <li
+                  <div
                     key={item}
-                    className="rounded-xl border border-slate-200 bg-slate-50 p-3"
+                    className="rounded-2xl border border-[#dedede]/80 bg-[#fbfbfb] p-4 text-xs font-semibold text-[#1a1919] hover:border-[#0eb02c]/40 hover:bg-white transition-all shadow-xs"
                   >
                     {item}
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
 

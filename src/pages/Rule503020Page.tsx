@@ -8,6 +8,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import { useCurrency } from '../context/CurrencyContext';
+import BudgetRule from '../BudgetRule';
 
 interface Rule503020PageProps {
   onBackToHome?: () => void;
@@ -179,6 +180,20 @@ export const Rule503020Page: React.FC<Rule503020PageProps> = ({
               </div>
             </div>
           </div>
+        </section>
+
+        {/* 2.5 Animated 50/30/20 Stage */}
+        <section className="rounded-3xl border border-[#1a1919]/10 shadow-sm bg-white overflow-hidden">
+          <div className="p-6 sm:p-8 border-b border-[#1a1919]/8 bg-slate-50/70 flex items-center justify-between">
+            <div>
+              <span className="text-[11px] font-mono font-bold uppercase text-[#0922b0] bg-[#0922b0]/10 px-2.5 py-1 rounded-lg">
+                VISUAL SCROLL EXPERIENCE
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-[#1a1919] mt-2">The 50/30/20 Animated Stage</h3>
+              <p className="text-xs text-[#1a1919]/60 mt-0.5">Scroll through the stages below to explore interactive cards for Needs, Wants, and Savings.</p>
+            </div>
+          </div>
+          <BudgetRule />
         </section>
 
         {/* 3. Deep Dive into the 3 Categories */}

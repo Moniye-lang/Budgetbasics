@@ -108,6 +108,14 @@ const navigation: NavItem[] = [
         page: 'money-mistakes',
         hash: '#money-mistakes',
       },
+      {
+        label: 'Decision Challenge Hub',
+        desc: '30-card swipe simulator, runway meter & cash flow basics',
+        icon: <Sparkles className="w-4 h-4 text-[#0922b0]" />,
+        page: 'learn',
+        hash: '#learn',
+        badge: 'Classic Hub',
+      },
     ],
   },
   {

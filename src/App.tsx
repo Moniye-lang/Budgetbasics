@@ -153,6 +153,7 @@ export const App: React.FC = () => {
         <BudgetingBasicsPage 
           onBackToHome={backToHome} 
           onNavigateToPractice={() => navigateTo('expense-planner', '#expense-planner')} 
+          onNavigateToNeedsVsWants={() => navigateTo('needs-vs-wants', '#needs-vs-wants')}
         />
       );
     }
@@ -161,6 +162,7 @@ export const App: React.FC = () => {
         <NeedsVsWantsPage 
           onBackToHome={backToHome} 
           onNavigateToPractice={() => navigateTo('expense-planner', '#expense-planner')} 
+          onNavigateToBasics={() => navigateTo('budgeting-basics', '#budgeting-basics')}
         />
       );
     }
