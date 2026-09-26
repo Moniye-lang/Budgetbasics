@@ -20,7 +20,6 @@ interface BudgetingBasicsPageProps {
 export const BudgetingBasicsPage: React.FC<BudgetingBasicsPageProps> = ({
   onNavigateToPractice,
   onNavigateToNeedsVsWants,
-  onOpenConverterModal,
 }) => {
   const { currentCurrency } = useCurrency();
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
